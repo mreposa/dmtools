@@ -34,6 +34,7 @@ public class AdndStatFrame extends StatFrame {
         this.tabs.add("Treasure Generator", new AdndTreasureGeneratorPanel((org.mreposa.dmtools.generator.adnd.DiceRollGenerator)this.rollGenerator));
         this.tabs.add("Gem Generator", new AdndGemGeneratorPanel((org.mreposa.dmtools.generator.adnd.DiceRollGenerator)this.rollGenerator));
         this.tabs.add("Jewelry Generator", new AdndJewelryGeneratorPanel((org.mreposa.dmtools.generator.adnd.DiceRollGenerator)this.rollGenerator));
+        this.tabs.add("Magic Item Generator", new AdndMagicItemGeneratorPanel((org.mreposa.dmtools.generator.adnd.DiceRollGenerator)this.rollGenerator));
     }
 
     @Override
