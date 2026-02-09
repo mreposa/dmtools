@@ -1,16 +1,66 @@
 package org.mreposa.dmtools.model.adnd.magic;
 
+import org.mreposa.dmtools.generator.adnd.DiceRollGenerator;
+import org.mreposa.dmtools.model.roll.Roll;
+
 public class MiscMagicE3 extends MagicItemTable {
-    public MiscMagicE3() {
-        super();
+    public MiscMagicE3(DiceRollGenerator diceRollGenerator) {
+        super(diceRollGenerator);
     }
 
     @Override
-    public String getMagicItem(int roll) {
+    public String getMagicItem() {
+        Roll dieRoll = this.diceRollGenerator.roll(1, 100);
+        int roll = dieRoll.getTotal();
+
         String itemName = "";
+        String type = "";
+        int typeRoll = 0;
 
         if (roll < 16) {
-            itemName = "figurine of wonderous power";
+            dieRoll = this.diceRollGenerator.roll(1, 100);
+            typeRoll = dieRoll.getTotal();
+
+            if (typeRoll < 16) {
+                type = "ebony fly";
+            }
+            else if (typeRoll < 31) {
+                type = "golden lions";
+            }
+            else if (typeRoll < 41) {
+                type = "ivory goats";
+            }
+            else if (typeRoll < 56) {
+                dieRoll = this.diceRollGenerator.roll(1, 100);
+                int subTypeRoll = dieRoll.getTotal();
+                String subType = "";
+
+                if (typeRoll < 51) {
+                    subType = "elephant";
+                }
+                else if (typeRoll < 51) {
+                    subType = "loxodont";
+                }
+                else if (typeRoll < 51) {
+                    subType = "mammoth";
+                }
+                else {
+                    subType = "mastodon";
+                }
+
+                type = "marble " + subType;
+            }
+            else if (typeRoll < 66) {
+                type = "obsidian steed";
+            }
+            else if (typeRoll < 86) {
+                type = "onyx dog";
+            }
+            else {
+                type = "serpentine owl";
+            }
+
+            itemName = "figurine of wonderous power (" + type + ")";
         }
         else if (roll == 16) {
             itemName = "flask of curses";
@@ -37,7 +87,29 @@ public class MiscMagicE3 extends MagicItemTable {
             itemName = "girdle of femininity/masculinity";
         }
         else if (roll == 29) {
-            itemName = "girdle of giant strength";
+            dieRoll = this.diceRollGenerator.roll(1, 100);
+            typeRoll = dieRoll.getTotal();
+
+            if (typeRoll < 31) {
+                type = "hill";
+            }
+            else if (typeRoll < 51) {
+                type = "stone";
+            }
+            else if (typeRoll < 71) {
+                type = "frost";
+            }
+            else if (typeRoll < 86) {
+                type = "fire";
+            }
+            else if (typeRoll < 96) {
+                type = "cloud";
+            }
+            else {
+                type = "storm";
+            }
+
+            itemName = "girdle of giant strength (" + type + ")";
         }
         else if (roll == 30) {
             itemName = "helm of brilliance";
@@ -70,7 +142,23 @@ public class MiscMagicE3 extends MagicItemTable {
             itemName = "horn of the tritons";
         }
         else if (roll < 61) {
-            itemName = "horn of Valhalla";
+            dieRoll = this.diceRollGenerator.roll(1, 20);
+            typeRoll = dieRoll.getTotal();
+
+            if (typeRoll < 9) {
+                type = "silver";
+            }
+            else if (typeRoll < 16) {
+                type = "brass";
+            }
+            else if (typeRoll < 19) {
+                type = "bronze";
+            }
+            else {
+                type = "iron";
+            }
+
+            itemName = "horn of Valhalla (" + type + ")";
         }
         else if (roll < 64) {
             itemName = "horseshoes of speed";
@@ -79,34 +167,187 @@ public class MiscMagicE3 extends MagicItemTable {
             itemName = "horseshoes of a zephyr";
         }
         else if (roll < 71) {
-            itemName = "incense of meditation";
+            dieRoll = this.diceRollGenerator.roll(2, 4);
+            int count = dieRoll.getTotal();
+
+            itemName = "incense of meditation (" + count + " pieces)";
         }
         else if (roll == 71) {
-            itemName = "incense of obsession";
+            dieRoll = this.diceRollGenerator.roll(2, 4);
+            int count = dieRoll.getTotal();
+
+            itemName = "incense of obsession (" + count + " pieces)";
         }
         else if (roll == 72) {
-            itemName = "ioun stone";
+            dieRoll = this.diceRollGenerator.roll(1, 20);
+            typeRoll = dieRoll.getTotal();
+
+            if (typeRoll == 1) {
+                type = "pale blue rhomboid";
+            }
+            else if (typeRoll == 2) {
+                type = "scarlet and blue sphere";
+            }
+            else if (typeRoll == 3) {
+                type = "incandescent blue sphere";
+            }
+            else if (typeRoll == 4) {
+                type = "deep red sphere";
+            }
+            else if (typeRoll == 5) {
+                type = "pink rhomboid";
+            }
+            else if (typeRoll == 6) {
+                type = "pink and green sphere";
+            }
+            else if (typeRoll == 7) {
+                type = "pale green prism";
+            }
+            else if (typeRoll == 8) {
+                type = "clear spindle";
+            }
+            else if (typeRoll == 9) {
+                type = "iridescent spindle";
+            }
+            else if (typeRoll == 10) {
+                type = "pearly white spindle";
+            }
+            else if (typeRoll == 11) {
+                type = "pale lavender ellipsoid";
+            }
+            else if (typeRoll == 12) {
+                type = "lavender and green ellipsoid";
+            }
+            else if (typeRoll == 13) {
+                type = "vibrant purple prism";
+            }
+            else if (typeRoll == 14) {
+                type = "dusty rose prism";
+            }
+            else {
+                type = "dull gray stone";
+            }
+
+            itemName = "ioun stone (" + type + ")";
         }
         else if (roll < 80) {
-            itemName = "instrument of the bards";
+            dieRoll = this.diceRollGenerator.roll(1, 20);
+            typeRoll = dieRoll.getTotal();
+
+            if (typeRoll < 6) {
+                type = "fochlucan bandalore";
+            }
+            else if (typeRoll < 10) {
+                type = "mac-fuirmidh cittern";
+            }
+            else if (typeRoll < 13) {
+                type = "doss lute";
+            }
+            else if (typeRoll < 16) {
+                type = "canaith mandolin";
+            }
+            else if (typeRoll < 18) {
+                type = "cli lyre";
+            }
+            else if (typeRoll < 20) {
+                type = "anstruth harp";
+            }
+            else {
+                type = "ollamh harp";
+            }
+
+            itemName = "instrument of the bards (" + type + ")";
         }
         else if (roll < 82) {
-            itemName = "iron flask";
+            dieRoll = this.diceRollGenerator.roll(1, 100);
+            typeRoll = dieRoll.getTotal();
+
+            if (typeRoll < 51) {
+                type = "empty";
+            }
+            else if (typeRoll < 55) {
+                type = "air elemental";
+            }
+            else if (typeRoll < 57) {
+                type = "demon type I - III";
+            }
+            else if (typeRoll == 57) {
+                type = "demon type IV - VI";
+            }
+            else if (typeRoll < 60) {
+                type = "lesser devil";
+            }
+            else if (typeRoll == 60) {
+                type = "greater devil";
+            }
+            else if (typeRoll < 66) {
+                type = "djinni";
+            }
+            else if (typeRoll < 70) {
+                type = "earth elemental";
+            }
+            else if (typeRoll < 73) {
+                type = "efreeti";
+            }
+            else if (typeRoll < 77) {
+                type = "fire elemental";
+            }
+            else if (typeRoll < 82) {
+                type = "invisible stalker";
+            }
+            else if (typeRoll < 84) {
+                type = "mezzodaemon";
+            }
+            else if (typeRoll < 86) {
+                type = "night hag";
+            }
+            else if (typeRoll == 86) {
+                type = "nycadaemon";
+            }
+            else if (typeRoll < 90) {
+                type = "rakshasa";
+            }
+            else if (typeRoll < 94) {
+                type = "salamander";
+            }
+            else if (typeRoll < 98) {
+                type = "water elemental";
+            }
+            else if (typeRoll < 100) {
+                type = "wind walker";
+            }
+            else {
+                type = "xorn";
+            }
+
+            itemName = "iron flask (" + type + ")";
         }
         else if (roll < 85) {
-            itemName = "javelin of lightning";
+            dieRoll = this.diceRollGenerator.roll(1, 4);
+            int count = dieRoll.getTotal() + 1;
+
+            itemName = "javelin of lightning (" + count + ")";
         }
         else if (roll < 91) {
-            itemName = "javelin of piercing";
+            dieRoll = this.diceRollGenerator.roll(2, 4);
+            int count = dieRoll.getTotal();
+
+            itemName = "javelin of piercing (" + count + ")";
         }
         else if (roll == 91) {
             itemName = "jewel of attacks";
         }
         else if (roll == 92) {
-            itemName = "jewel of flawlessness";
+            dieRoll = this.diceRollGenerator.roll(10, 10);
+            int count = dieRoll.getTotal();
+
+            itemName = "jewel of flawlessness (" + count + " facets)";
         }
         else {
-            itemName = "Keoghtom's ointment";
+            dieRoll = this.diceRollGenerator.roll(1, 3);
+            int count = dieRoll.getTotal();
+
+            itemName = "Keoghtom's ointment (" + count + " jars)";
         }
 
         return itemName;

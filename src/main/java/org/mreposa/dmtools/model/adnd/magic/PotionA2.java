@@ -1,13 +1,21 @@
 package org.mreposa.dmtools.model.adnd.magic;
 
+import org.mreposa.dmtools.generator.adnd.DiceRollGenerator;
+import org.mreposa.dmtools.model.roll.Roll;
+
 public class PotionA2 extends MagicItemTable {
-    public PotionA2() {
-        super();
+    public PotionA2(DiceRollGenerator diceRollGenerator) {
+        super(diceRollGenerator);
     }
 
     @Override
-    public String getMagicItem(int roll) {
+    public String getMagicItem() {
+        Roll dieRoll = this.diceRollGenerator.roll(1, 100);
+        int roll = dieRoll.getTotal();
+
         String itemName = "potion of ";
+        String type = "";
+        int typeRoll = 0;
 
         if (roll < 6) {
             itemName = "elixir of health";
@@ -43,7 +51,29 @@ public class PotionA2 extends MagicItemTable {
             itemName = "oil of impact";
         }
         else if (roll < 66) {
-            itemName = "oil of sharpness";
+            dieRoll = this.diceRollGenerator.roll(1, 20);
+            typeRoll = dieRoll.getTotal();
+
+            if (typeRoll < 3) {
+                type = "+1";
+            }
+            else if (typeRoll < 6) {
+                type = "+2";
+            }
+            else if (typeRoll < 12) {
+                type = "+3";
+            }
+            else if (typeRoll < 17) {
+                type = "+4";
+            }
+            else if (typeRoll < 20) {
+                type = "+5";
+            }
+            else {
+                type = "+6";
+            }
+
+            itemName = "oil of sharpness " + type;
         }
         else if (roll < 71) {
             itemName = "oil of timelessness";

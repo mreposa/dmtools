@@ -1,13 +1,21 @@
 package org.mreposa.dmtools.model.adnd.magic;
 
+import org.mreposa.dmtools.generator.adnd.DiceRollGenerator;
+import org.mreposa.dmtools.model.roll.Roll;
+
 public class MiscMagicE7 extends MagicItemTable {
-    public MiscMagicE7() {
-        super();
+    public MiscMagicE7(DiceRollGenerator diceRollGenerator) {
+        super(diceRollGenerator);
     }
 
     @Override
-    public String getMagicItem(int roll) {
+    public String getMagicItem() {
+        Roll dieRoll = this.diceRollGenerator.roll(1, 100);
+        int roll = dieRoll.getTotal();
+
         String itemName = "";
+        String type = "";
+        int typeRoll = 0;
 
         if (roll < 6) {
             itemName = "Heward's handy haversack";
@@ -55,7 +63,29 @@ public class MiscMagicE7 extends MagicItemTable {
             itemName = "robe of vermin";
         }
         else if (roll < 51) {
-            itemName = "scarab vs. golems";
+            dieRoll = this.diceRollGenerator.roll(1, 100);
+            typeRoll = dieRoll.getTotal();
+
+            if (typeRoll < 31) {
+                type = "flesh";
+            }
+            else if (typeRoll < 56) {
+                type = "clay";
+            }
+            else if (typeRoll < 76) {
+                type = "stone";
+            }
+            else if (typeRoll < 86) {
+                type = "iron";
+            }
+            else if (typeRoll < 96) {
+                type = "flesh/clay/wood";
+            }
+            else  {
+                type = "any";
+            }
+
+            itemName = "scarab vs. golems (" + type + " level cleric)";
         }
         else if (roll < 55) {
             itemName = "shadow lanthorn";
@@ -73,13 +103,26 @@ public class MiscMagicE7 extends MagicItemTable {
             itemName = "slippers of spider climbing";
         }
         else if (roll < 73) {
-            itemName = "sovereign glue";
+            dieRoll = this.diceRollGenerator.roll(1, 10);
+            int count = dieRoll.getTotal();
+
+            itemName = "sovereign glue (" + count + " ounces)";
         }
         else if (roll < 78) {
             itemName = "spoon of stirring";
         }
         else if (roll < 82) {
-            itemName = "stone horse";
+            dieRoll = this.diceRollGenerator.roll(1, 100);
+            typeRoll = dieRoll.getTotal();
+
+            if (typeRoll < 51) {
+                type = "courser";
+            }
+            else  {
+                type = "destrier";
+            }
+
+            itemName = "stone horse (" + type + ")";
         }
         else if (roll < 85) {
             itemName = "ultimate solution";
@@ -91,7 +134,29 @@ public class MiscMagicE7 extends MagicItemTable {
             itemName = "Zagyg's flowing flagon";
         }
         else {
-            itemName = "Zagyg's spell component case";
+            dieRoll = this.diceRollGenerator.roll(1, 20);
+            typeRoll = dieRoll.getTotal();
+
+            if (typeRoll < 4) {
+                type = "2";
+            }
+            else if (typeRoll < 7) {
+                type = "3";
+            }
+            else if (typeRoll < 11) {
+                type = "4";
+            }
+            else if (typeRoll < 15) {
+                type = "5";
+            }
+            else if (typeRoll < 20) {
+                type = "6";
+            }
+            else  {
+                type = "7";
+            }
+
+            itemName = "Zagyg's spell component case (" + type + " uses per day)";
         }
 
         return itemName;

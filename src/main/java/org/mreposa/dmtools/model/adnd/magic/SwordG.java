@@ -1,12 +1,18 @@
 package org.mreposa.dmtools.model.adnd.magic;
 
+import org.mreposa.dmtools.generator.adnd.DiceRollGenerator;
+import org.mreposa.dmtools.model.roll.Roll;
+
 public class SwordG extends MagicItemTable {
-    public SwordG() {
-        super();
+    public SwordG(DiceRollGenerator diceRollGenerator) {
+        super(diceRollGenerator);
     }
 
     @Override
-    public String getMagicItem(int roll) {
+    public String getMagicItem() {
+        Roll dieRoll = this.diceRollGenerator.roll(1, 100);
+        int roll = dieRoll.getTotal();
+
         String itemName = "";
 
         if (roll == 26) {
@@ -28,7 +34,10 @@ public class SwordG extends MagicItemTable {
             itemName = "sword +1 flame tongue";
         }
         else if (roll == 50) {
-            itemName = "sword +1 luck blade";
+            dieRoll = this.diceRollGenerator.roll(1, 4);
+            int count = dieRoll.getTotal() + 1;
+
+            itemName = "sword +1 luck blade (" + count + " wishes)";
         }
         else if (roll < 59) {
             itemName = "sword +2";

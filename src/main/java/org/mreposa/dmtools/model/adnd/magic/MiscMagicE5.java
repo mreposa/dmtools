@@ -1,16 +1,37 @@
 package org.mreposa.dmtools.model.adnd.magic;
 
+import org.mreposa.dmtools.generator.adnd.DiceRollGenerator;
+import org.mreposa.dmtools.model.roll.Roll;
+
 public class MiscMagicE5 extends MagicItemTable {
-    public MiscMagicE5() {
-        super();
+    public MiscMagicE5(DiceRollGenerator diceRollGenerator) {
+        super(diceRollGenerator);
     }
 
     @Override
-    public String getMagicItem(int roll) {
+    public String getMagicItem() {
+        Roll dieRoll = this.diceRollGenerator.roll(1, 100);
+        int roll = dieRoll.getTotal();
+
         String itemName = "";
+        String type = "";
+        int typeRoll = 0;
 
         if (roll == 1) {
-            itemName = "robe of the archmagi";
+            dieRoll = this.diceRollGenerator.roll(1, 100);
+            typeRoll = dieRoll.getTotal();
+
+            if (typeRoll < 46) {
+                type = "good";
+            }
+            else if (typeRoll < 76) {
+                type = "true neutral";
+            }
+            else  {
+                type = "evil";
+            }
+
+            itemName = "robe of the archmagi (" + type + ")";
         }
         else if (roll < 9) {
             itemName = "robe of blending";
@@ -25,7 +46,10 @@ public class MiscMagicE5 extends MagicItemTable {
             itemName = "robe of scintillating colors";
         }
         else if (roll < 20) {
-            itemName = "robe of useful items";
+            dieRoll = this.diceRollGenerator.roll(4, 4);
+            int count = dieRoll.getTotal();
+
+            itemName = "robe of useful items (plus " + count + " items)";
         }
         else if (roll < 26) {
             itemName = "rope of climbing";
@@ -52,10 +76,27 @@ public class MiscMagicE5 extends MagicItemTable {
             itemName = "scarab of enraging enemies";
         }
         else if (roll == 41) {
-            itemName = "scarab of insanity";
+            dieRoll = this.diceRollGenerator.roll(1, 8);
+            int count = dieRoll.getTotal() + 8;
+
+            itemName = "scarab of insanity (" + count + " charges)";
         }
         else if (roll < 47) {
-            itemName = "scarab of protection";
+            dieRoll = this.diceRollGenerator.roll(1, 20);
+            typeRoll = dieRoll.getTotal();
+
+            if  (typeRoll == 1) {
+                type = " (cursed)";
+
+                dieRoll = this.diceRollGenerator.roll(1, 5);
+                int special = dieRoll.getTotal();
+
+                if (special == 1) {
+                    type = " (special cursed)";
+                }
+            }
+
+            itemName = "scarab of protection" + type;
         }
         else if (roll == 47) {
             itemName = "spade of colossal excavation";
@@ -94,10 +135,16 @@ public class MiscMagicE5 extends MagicItemTable {
             itemName = "tome of understanding";
         }
         else if (roll < 77) {
-            itemName = "trident of fish command";
+            dieRoll = this.diceRollGenerator.roll(1, 4);
+            int count = dieRoll.getTotal() + 16;
+
+            itemName = "trident of fish command (" + count + " charges)";
         }
         else if (roll < 79) {
-            itemName = "trident of submission";
+            dieRoll = this.diceRollGenerator.roll(1, 4);
+            int count = dieRoll.getTotal() + 16;
+
+            itemName = "trident of submission (" + count + " charges)";
         }
         else if (roll < 84) {
             itemName = "trident of warning";

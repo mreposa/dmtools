@@ -1,13 +1,21 @@
 package org.mreposa.dmtools.model.adnd.magic;
 
+import org.mreposa.dmtools.generator.adnd.DiceRollGenerator;
+import org.mreposa.dmtools.model.roll.Roll;
+
 public class ScrollB2 extends MagicItemTable {
-    public ScrollB2() {
-        super();
+    public ScrollB2(DiceRollGenerator diceRollGenerator) {
+        super(diceRollGenerator);
     }
 
     @Override
-    public String getMagicItem(int roll) {
+    public String getMagicItem() {
+        Roll dieRoll = this.diceRollGenerator.roll(1, 100);
+        int roll = dieRoll.getTotal();
+
         String itemName = "scroll of ";
+        String type = "";
+        int typeRoll = 0;
 
         if (roll < 3) {
             itemName = itemName + "protection - acid";
@@ -43,7 +51,20 @@ public class ScrollB2 extends MagicItemTable {
             itemName = itemName + "protection - poison";
         }
         else if (roll < 60) {
-            itemName = itemName + "protection - traps";
+            dieRoll = this.diceRollGenerator.roll(1, 100);
+            typeRoll = dieRoll.getTotal();
+
+            if (typeRoll < 51) {
+                type = "mechanical";
+            }
+            else if (typeRoll < 81) {
+                type = "magical";
+            }
+            else {
+                type = "any trap";
+            }
+
+            itemName = itemName + "protection - traps (" + type + ")";
         }
         else if (roll < 65) {
             itemName = itemName + "protection - water";

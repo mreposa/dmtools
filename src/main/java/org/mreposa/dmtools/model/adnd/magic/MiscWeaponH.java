@@ -1,25 +1,125 @@
 package org.mreposa.dmtools.model.adnd.magic;
 
+import org.mreposa.dmtools.generator.adnd.DiceRollGenerator;
+import org.mreposa.dmtools.model.roll.Roll;
+
 public class MiscWeaponH extends MagicItemTable {
-    public MiscWeaponH() {
-        super();
+    public MiscWeaponH(DiceRollGenerator diceRollGenerator) {
+        super(diceRollGenerator);
     }
 
     @Override
-    public String getMagicItem(int roll) {
+    public String getMagicItem() {
+        Roll dieRoll = this.diceRollGenerator.roll(1, 100);
+        int roll = dieRoll.getTotal();
+
         String itemName = "";
 
         if (roll == 9) {
-            itemName = "arrow +1 (2 - 24)";
+            dieRoll = this.diceRollGenerator.roll(2, 12);
+            int count = dieRoll.getTotal();
+
+            itemName = "arrow +1 (" + count + ")";
         }
         else if (roll < 13) {
-            itemName = "arrow +2 (2 - 16)";
+            dieRoll = this.diceRollGenerator.roll(2, 8);
+            int count = dieRoll.getTotal();
+
+            itemName = "arrow +2 (" + count + ")";
         }
         else if (roll < 15) {
-            itemName = "arrow +3 (2 - 12)";
+            dieRoll = this.diceRollGenerator.roll(2, 6);
+            int count = dieRoll.getTotal();
+
+            itemName = "arrow +3 (" + count + ")";
         }
         else if (roll == 15) {
-            itemName = "arrow of slaying";
+            dieRoll = this.diceRollGenerator.roll(1, 3);
+            int columnRoll = dieRoll.getTotal();
+            dieRoll = this.diceRollGenerator.roll(1, 8);
+            int typeRoll = dieRoll.getTotal();
+
+            String type = "";
+            if (columnRoll == 1) {
+                if (typeRoll == 1) {
+                    type = "arachnids";
+                }
+                else if (typeRoll == 2) {
+                    type = "avians";
+                }
+                else if (typeRoll == 3) {
+                    type = "bards";
+                }
+                else if (typeRoll == 4) {
+                    type = "clerics";
+                }
+                else if (typeRoll == 5) {
+                    type = "demons";
+                }
+                else if (typeRoll == 6) {
+                    type = "devils";
+                }
+                else if (typeRoll == 7) {
+                    type = "dragons";
+                }
+                else  {
+                    type = "druids";
+                }
+            }
+            else if (columnRoll == 2) {
+                if (typeRoll == 1) {
+                    type = "elementals";
+                }
+                else if (typeRoll == 2) {
+                    type = "fighters";
+                }
+                else if (typeRoll == 3) {
+                    type = "giants";
+                }
+                else if (typeRoll == 4) {
+                    type = "golems";
+                }
+                else if (typeRoll == 5) {
+                    type = "illusionists";
+                }
+                else if (typeRoll == 6) {
+                    type = "ki-rin";
+                }
+                else if (typeRoll == 7) {
+                    type = "magic-users";
+                }
+                else  {
+                    type = "mammals";
+                }
+            }
+            else {
+                if (typeRoll == 1) {
+                    type = "monks";
+                }
+                else if (typeRoll == 2) {
+                    type = "paladins";
+                }
+                else if (typeRoll == 3) {
+                    type = "rangers";
+                }
+                else if (typeRoll == 4) {
+                    type = "reptiles";
+                }
+                else if (typeRoll == 5) {
+                    type = "sea monsters";
+                }
+                else if (typeRoll == 6) {
+                    type = "thieves";
+                }
+                else if (typeRoll == 7) {
+                    type = "titans";
+                }
+                else  {
+                    type = "undead";
+                }
+            }
+
+            itemName = "arrow of slaying (" + type + ")";
         }
         else if (roll < 21) {
             itemName = "axe +1";
@@ -37,7 +137,10 @@ public class MiscWeaponH extends MagicItemTable {
             itemName = "battle axe +1";
         }
         else if (roll < 33) {
-            itemName = "bolt +2 (2 - 20)";
+            dieRoll = this.diceRollGenerator.roll(2, 10);
+            int count = dieRoll.getTotal();
+
+            itemName = "bolt +2 (" + count + ")";
         }
         else if (roll < 36) {
             itemName = "bow +1";

@@ -1,13 +1,21 @@
 package org.mreposa.dmtools.model.adnd.magic;
 
+import org.mreposa.dmtools.generator.adnd.DiceRollGenerator;
+import org.mreposa.dmtools.model.roll.Roll;
+
 public class MiscMagicE extends MagicItemTable {
-    public MiscMagicE() {
-        super();
+    public MiscMagicE(DiceRollGenerator diceRollGenerator) {
+        super(diceRollGenerator);
     }
 
     @Override
-    public String getMagicItem(int roll) {
+    public String getMagicItem() {
+        Roll dieRoll = this.diceRollGenerator.roll(1, 100);
+        int roll = dieRoll.getTotal();
+
         String itemName = "";
+        String type = "";
+        int typeRoll = 0;
 
         if (roll < 3) {
             itemName = "alchemy jug";
@@ -40,16 +48,51 @@ public class MiscMagicE extends MagicItemTable {
             itemName = "bag of devouring";
         }
         else if (roll < 27) {
-            itemName = "bag of holding";
+            dieRoll = this.diceRollGenerator.roll(1, 100);
+            typeRoll = dieRoll.getTotal();
+
+            if (typeRoll < 31) {
+                type = "250 lb/30 cu ft";
+            }
+            else if (typeRoll < 71) {
+                type = "500 lb/70 cu ft";
+            }
+            else if (typeRoll < 91) {
+                type = "1000 lb/150 cu ft";
+            }
+            else {
+                type = "1500 lb/250 cu ft";
+            }
+
+            itemName = "bag of holding (" + type + ")";
         }
         else if (roll == 27) {
             itemName = "bag of transmuting";
         }
         else if (roll < 30) {
-            itemName = "bag of tricks";
+            dieRoll = this.diceRollGenerator.roll(1, 10);
+            typeRoll = dieRoll.getTotal();
+
+            if (typeRoll < 6) {
+                type = "type I";
+            }
+            else if (typeRoll < 9) {
+                type = "type II";
+            }
+            else {
+                type = "type III";
+            }
+
+            itemName = "bag of tricks (" + type + ")";
         }
         else if (roll < 32) {
-            itemName = "beaker of plentiful potions";
+            dieRoll = this.diceRollGenerator.roll(1, 4);
+            int doses = dieRoll.getTotal() + 1;
+
+            dieRoll = this.diceRollGenerator.roll(1, 4);
+            int potions = dieRoll.getTotal() + 1;
+
+            itemName = "beaker of plentiful potions (" + doses + " doses of " + potions + " potions)";
         }
         else if (roll == 32) {
             itemName = "folding boat";
@@ -58,7 +101,10 @@ public class MiscMagicE extends MagicItemTable {
             itemName = "book of exalted deeds";
         }
         else if (roll == 34) {
-            itemName = "book of infinite spells";
+            dieRoll = this.diceRollGenerator.roll(1, 8);
+            int pages = dieRoll.getTotal() + 22;
+
+            itemName = "book of infinite spells (" + pages + " pages)";
         }
         else if (roll == 35) {
             itemName = "book of vile darkness";
@@ -70,7 +116,10 @@ public class MiscMagicE extends MagicItemTable {
             itemName = "boots of elvenkind";
         }
         else if (roll < 48) {
-            itemName = "boots of levitation";
+            dieRoll = this.diceRollGenerator.roll(1, 20);
+            int weight = 280 + (dieRoll.getTotal() * 14);
+
+            itemName = "boots of levitation (" + weight + " lbs max)";
         }
         else if (roll < 52) {
             itemName = "boots of speed";
@@ -85,10 +134,60 @@ public class MiscMagicE extends MagicItemTable {
             itemName = "bowl of watery death";
         }
         else if (roll < 80) {
-            itemName = "bracers of defense";
+            dieRoll = this.diceRollGenerator.roll(1, 100);
+            typeRoll = dieRoll.getTotal();
+
+            if (typeRoll < 6) {
+                type = "8";
+            }
+            else if (typeRoll < 16) {
+                type = "7";
+            }
+            else if (typeRoll < 36) {
+                type = "6";
+            }
+            else if (typeRoll < 51) {
+                type = "5";
+            }
+            else if (typeRoll < 71) {
+                type = "4";
+            }
+            else if (typeRoll < 86) {
+                type = "3";
+            }
+            else {
+                type = "2";
+            }
+
+            itemName = "bracers of defense AC " + type;
         }
         else if (roll < 82) {
-            itemName = "bracers of defenselessness";
+            dieRoll = this.diceRollGenerator.roll(1, 100);
+            typeRoll = dieRoll.getTotal();
+
+            if (typeRoll < 6) {
+                type = "8";
+            }
+            else if (typeRoll < 16) {
+                type = "7";
+            }
+            else if (typeRoll < 36) {
+                type = "6";
+            }
+            else if (typeRoll < 51) {
+                type = "5";
+            }
+            else if (typeRoll < 71) {
+                type = "4";
+            }
+            else if (typeRoll < 86) {
+                type = "3";
+            }
+            else {
+                type = "2";
+            }
+
+            itemName = "bracers of defenselessness AC " + type;
         }
         else if (roll < 85) {
             itemName = "brazier commanding fire elementals";
@@ -106,7 +205,20 @@ public class MiscMagicE extends MagicItemTable {
             itemName = "broom of flying";
         }
         else {
-            itemName = "Bucknard's everfull purse";
+            dieRoll = this.diceRollGenerator.roll(1, 100);
+            typeRoll = dieRoll.getTotal();
+
+            if (typeRoll < 51) {
+                type = "type I";
+            }
+            else if (typeRoll < 91) {
+                type = "type II";
+            }
+            else {
+                type = "type III";
+            }
+
+            itemName = "Bucknard's everfull purse (" + type + ")";
         }
 
         return itemName;
