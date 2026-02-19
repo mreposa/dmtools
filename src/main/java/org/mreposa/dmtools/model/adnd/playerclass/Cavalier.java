@@ -6,14 +6,6 @@ public class Cavalier extends PlayerCharacterClass {
     }
 
     @Override
-    public int[] getUpdates() {
-        updates[STAT_STR] = PRIMARY_UPDATE_VALUE;
-        updates[STAT_CON] = SECONDARY_UPDATE_VALUE;
-        updates[STAT_DEX] = TERTIARY_UPDATE_VALUE;
-        return updates;
-    }
-
-    @Override
     public int[] getMinimums() {
         minimums[STAT_STR] = 15;
         minimums[STAT_INT] = 10;

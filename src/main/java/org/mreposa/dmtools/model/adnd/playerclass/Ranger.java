@@ -6,14 +6,6 @@ public class Ranger extends PlayerCharacterClass {
     }
 
     @Override
-    public int[] getUpdates() {
-        updates[STAT_CON] = PRIMARY_UPDATE_VALUE;
-        updates[STAT_WIS] = SECONDARY_UPDATE_VALUE;
-        updates[STAT_STR] = TERTIARY_UPDATE_VALUE;
-        return updates;
-    }
-
-    @Override
     public int[] getMinimums() {
         minimums[STAT_STR] = 13;
         minimums[STAT_INT] = 13;

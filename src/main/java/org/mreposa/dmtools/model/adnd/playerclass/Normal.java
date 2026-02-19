@@ -6,10 +6,5 @@ public class Normal extends PlayerCharacterClass {
     }
 
     @Override
-    public int[] getUpdates() {
-        return updates;
-    }
-
-    @Override
     public int[] getMinimums() { return minimums; }
 }

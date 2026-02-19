@@ -32,22 +32,14 @@ public abstract class PlayerCharacterClass {
     public static final int MAX_COM_STAT_VALUE = 25;
     public static final int MAX_WIS_STAT_BARBARIAN = 16;
 
-    protected static final int PRIMARY_UPDATE_VALUE = 3;
-    protected static final int SECONDARY_UPDATE_VALUE = 2;
-    protected static final int TERTIARY_UPDATE_VALUE = 1;
-    protected int[] updates;
-
     public static final int DEFAULT_STAT_VALUE = 3;
     protected static final int DEFAULT_EX_STR_VALUE = 0;
     protected int[] minimums;
 
     public PlayerCharacterClass() {
-        updates = new int[AVAILABLE_STATS.length];
         minimums = new int[AVAILABLE_STATS.length];
 
         for (int a = 0; a < AVAILABLE_STATS.length; a++) {
-            updates[a] = 0;
-
             if (a == 1) {
                 minimums[a] = DEFAULT_EX_STR_VALUE;
             }
@@ -57,17 +49,13 @@ public abstract class PlayerCharacterClass {
         }
     }
 
-    public abstract int[] getUpdates();
     public abstract int[] getMinimums();
 
     public static PlayerCharacterClass getPlayerCharacterClass(String selectedClass) {
         PlayerCharacterClass pcClass = null;
 
         if (selectedClass != null) {
-            if (selectedClass.equals(AVAILABLE_CLASSES[CLASS_CLERIC])) {
-                pcClass = new Cleric();
-            }
-            else if (selectedClass.equals(AVAILABLE_CLASSES[CLASS_DRUID])) {
+            if (selectedClass.equals(AVAILABLE_CLASSES[CLASS_DRUID])) {
                 pcClass = new Druid();
             }
             else if (selectedClass.equals(AVAILABLE_CLASSES[CLASS_FIGHTER])) {

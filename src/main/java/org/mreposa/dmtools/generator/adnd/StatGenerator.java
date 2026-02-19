@@ -22,7 +22,6 @@ public class StatGenerator implements org.mreposa.dmtools.generator.StatGenerato
             PlayerCharacterClass pcClass = PlayerCharacterClass.getPlayerCharacterClass(selectedClass);
             PlayerCharacterRace pcRace = PlayerCharacterRace.getPlayerCharacterRace(selectedRace);
 
-            int[] classUpdates = pcClass.getUpdates();
             int[] classMinimums = pcClass.getMinimums();
             int[] raceUpdates = pcRace.getUpdates();
             int[] raceMinimums = pcRace.getMinimums();
@@ -33,21 +32,14 @@ public class StatGenerator implements org.mreposa.dmtools.generator.StatGenerato
             for (int statSlot = 0; statSlot < PlayerCharacterClass.AVAILABLE_STATS.length; statSlot++) {
                 // Generate base stat value
                 if (selectedMethod.equals(StatMethod.AVAILABLE_METHODS[1])) {
-                    method = new ThreeDSix();
-                    total = method.generate(this.rand);
-
-                    // Adjust stats using class updates
-                    total = total + classUpdates[statSlot];
-                }
-                else if (selectedMethod.equals(StatMethod.AVAILABLE_METHODS[2])) {
                     method = new FiveDSixBestThree();
                     total = method.generate(this.rand);
                 }
-                else if (selectedMethod.equals(StatMethod.AVAILABLE_METHODS[3])) {
+                else if (selectedMethod.equals(StatMethod.AVAILABLE_METHODS[2])) {
                     method = new FourDSixDropLowest();
                     total = method.generate(this.rand);
                 }
-                else if (selectedMethod.equals(StatMethod.AVAILABLE_METHODS[4])) {
+                else if (selectedMethod.equals(StatMethod.AVAILABLE_METHODS[3])) {
                     method = new ThreeDSixSixTimes();
                     total = method.generate(this.rand);
                 }
