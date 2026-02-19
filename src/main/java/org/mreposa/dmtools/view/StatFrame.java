@@ -124,6 +124,7 @@ public abstract class StatFrame extends JFrame {
         add(tabs);
 
         this.pack();
+        this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
 
