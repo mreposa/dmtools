@@ -3,6 +3,9 @@ package org.mreposa.dmtools.generator.adnd;
 import org.mreposa.dmtools.model.adnd.details.*;
 import org.mreposa.dmtools.model.roll.Roll;
 
+import java.util.Arrays;
+import java.util.HashSet;
+
 public class CharacterDetailsGenerator {
     private final DiceRollGenerator diceRollGenerator;
 
@@ -49,22 +52,24 @@ public class CharacterDetailsGenerator {
 
         /* TRAITS */
 
-        String[] tendencies = details.getTendencies();
+        HashSet<String> tendencySet = new HashSet<>();
+        String tendency;
         for (int i = 0; i < CharacterDetailsTable.TENDENCIES_COUNT; i++) {
-            roll = this.diceRollGenerator.roll(1, 10);
-            columnValue = roll.getTotal();
+            do {
+                roll = this.diceRollGenerator.roll(1, 6);
+                columnValue = roll.getTotal();
 
-            roll = this.diceRollGenerator.roll(1, 12);
-            rollValue = roll.getTotal() - 1;
+                roll = this.diceRollGenerator.roll(1, 12);
+                rollValue = roll.getTotal() - 1;
 
-            if (columnValue < 4) {
-                tendencies[i] = CharacterDetailsTable.TENDENCIES_1[rollValue];
-            }
-            else {
-                tendencies[i] = CharacterDetailsTable.TENDENCIES_2[rollValue];
-            }
+                if (columnValue < 4) {
+                    tendency = CharacterDetailsTable.TENDENCIES_1[rollValue];
+                } else {
+                    tendency = CharacterDetailsTable.TENDENCIES_2[rollValue];
+                }
+            } while (!tendencySet.add(tendency));
         }
-        details.setTendencies(tendencies);
+        details.setTendencies(tendencySet.toArray(details.getTendencies()));
 
         roll = this.diceRollGenerator.roll(1, 8);
         columnValue = roll.getTotal();
