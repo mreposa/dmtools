@@ -1,8 +1,8 @@
 package org.mreposa.dmtools.view.adnd;
 
 import org.mreposa.dmtools.generator.adnd.DiceRollGenerator;
-import org.mreposa.dmtools.generator.adnd.MagicItemGenerator;
-import org.mreposa.dmtools.model.adnd.magic.MagicItem;
+import org.mreposa.dmtools.generator.adnd.JewelryGenerator;
+import org.mreposa.dmtools.model.adnd.gem.Jewelry;
 
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
@@ -11,21 +11,21 @@ import java.awt.*;
 import java.io.Serial;
 import java.util.List;
 
-public class AdndMagicItemGeneratorPanel extends JPanel {
+public class JewelryGeneratorPanel extends JPanel {
     @Serial
     private static final long serialVersionUID = 1L;
 
     private static final int PANEL_WIDTH = 1600;
     private static final int PANEL_HEIGHT = 1000;
 
-    private final MagicItemGenerator magicItemGenerator;
-    private final JTextField itemCount;
+    private final JewelryGenerator jewelryGenerator;
+    private final JTextField jewelryCount;
     private final JEditorPane display;
 
-    public AdndMagicItemGeneratorPanel(DiceRollGenerator rollGenerator) {
+    public JewelryGeneratorPanel(DiceRollGenerator rollGenerator) {
         super();
 
-        this.magicItemGenerator = new MagicItemGenerator(rollGenerator);
+        this.jewelryGenerator = new JewelryGenerator(rollGenerator);
 
         setLayout(new BorderLayout());
         Dimension d = new Dimension(PANEL_WIDTH, PANEL_HEIGHT);
@@ -38,9 +38,9 @@ public class AdndMagicItemGeneratorPanel extends JPanel {
         JLabel label1 = new JLabel(labelText);
         selectionPanel.add(label1);
 
-        this.itemCount = new JTextField("1");
-        this.itemCount.setColumns(3);
-        selectionPanel.add(this.itemCount);
+        this.jewelryCount = new JTextField("1");
+        this.jewelryCount.setColumns(3);
+        selectionPanel.add(this.jewelryCount);
 
         JButton generateButton = new JButton("Generate");
         Dimension bd = new Dimension(90, 20);
@@ -66,11 +66,11 @@ public class AdndMagicItemGeneratorPanel extends JPanel {
     }
 
     private void displayRoll() {
-        int itemCount = Integer.parseInt(this.itemCount.getText());
+        int jewelryCount = Integer.parseInt(this.jewelryCount.getText());
 
-        List<MagicItem> magicItems = this.magicItemGenerator.generate(itemCount);
+        List<Jewelry> jewelryList = this.jewelryGenerator.generate(jewelryCount);
 
-        String output = getOutput(magicItems);
+        String output = getOutput(jewelryList);
 
         try {
             Document doc = this.display.getDocument();
@@ -80,13 +80,18 @@ public class AdndMagicItemGeneratorPanel extends JPanel {
         }
     }
 
-    private String getOutput(List<MagicItem> magicItems) {
+    private String getOutput(List<Jewelry> jewelryList) {
         StringBuilder output = new StringBuilder();
         int a = 0;
-        for (MagicItem magicItem : magicItems) {
-            output.append(magicItem.getName());
+        for (Jewelry jewelry : jewelryList) {
+            output.append(jewelry.getPiece());
+            output.append(" (");
+            output.append(jewelry.getMake());
+            output.append(", ");
+            output.append(jewelry.getBaseValue());
+            output.append(" gp)");
 
-            if (a < magicItems.size() - 1) {
+            if (a < jewelryList.size() - 1) {
                 output.append(", ");
             }
 

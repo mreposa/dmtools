@@ -11,7 +11,7 @@ import javax.swing.text.Document;
 import java.awt.*;
 import java.io.Serial;
 
-public class AdndTreasureGeneratorPanel extends JPanel {
+public class TreasureGeneratorPanel extends JPanel {
     @Serial
     private static final long serialVersionUID = 1L;
 
@@ -22,7 +22,7 @@ public class AdndTreasureGeneratorPanel extends JPanel {
     private final JComboBox<String> treasureType;
     private final JEditorPane display;
 
-    public AdndTreasureGeneratorPanel(DiceRollGenerator rollGenerator) {
+    public TreasureGeneratorPanel(DiceRollGenerator rollGenerator) {
         super();
 
         this.treasureGenerator = new TreasureGenerator(rollGenerator);

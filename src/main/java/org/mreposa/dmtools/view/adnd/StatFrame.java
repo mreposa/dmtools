@@ -4,16 +4,15 @@ import org.mreposa.dmtools.generator.adnd.DiceRollGenerator;
 import org.mreposa.dmtools.model.adnd.playerclass.PlayerCharacterClass;
 import org.mreposa.dmtools.generator.adnd.StatGenerator;
 import org.mreposa.dmtools.model.adnd.rollmethod.StatMethod;
-import org.mreposa.dmtools.view.StatFrame;
 
 import javax.swing.*;
 
-public class AdndStatFrame extends StatFrame {
+public class StatFrame extends org.mreposa.dmtools.view.StatFrame {
     private static final String APP_VERSION = "1.0.0";
     private static final String APP_TITLE = "AD&D DM Tools";
     private static final String ABOUT_MESSAGE = APP_TITLE + "\nVersion " + APP_VERSION + "\n" + "Michael Reposa\n" + "27-AUG-2025";
 
-    public AdndStatFrame() {
+    public StatFrame() {
         super(new StatGenerator(), new DiceRollGenerator());
 
         this.setTitle(APP_TITLE);
@@ -30,11 +29,12 @@ public class AdndStatFrame extends StatFrame {
             }
         }
 
-        this.tabs.add("Thief Functions", new AdndThiefFunctionPanel());
-        this.tabs.add("Treasure Generator", new AdndTreasureGeneratorPanel((org.mreposa.dmtools.generator.adnd.DiceRollGenerator)this.rollGenerator));
-        this.tabs.add("Gem Generator", new AdndGemGeneratorPanel((org.mreposa.dmtools.generator.adnd.DiceRollGenerator)this.rollGenerator));
-        this.tabs.add("Jewelry Generator", new AdndJewelryGeneratorPanel((org.mreposa.dmtools.generator.adnd.DiceRollGenerator)this.rollGenerator));
-        this.tabs.add("Magic Item Generator", new AdndMagicItemGeneratorPanel((org.mreposa.dmtools.generator.adnd.DiceRollGenerator)this.rollGenerator));
+        this.tabs.add("Character Facts and Traits", new CharacterDetailsGeneratorPanel((org.mreposa.dmtools.generator.adnd.DiceRollGenerator)this.rollGenerator));
+        this.tabs.add("Thief Functions", new ThiefFunctionPanel());
+        this.tabs.add("Treasure Generator", new TreasureGeneratorPanel((org.mreposa.dmtools.generator.adnd.DiceRollGenerator)this.rollGenerator));
+        this.tabs.add("Gem Generator", new GemGeneratorPanel((org.mreposa.dmtools.generator.adnd.DiceRollGenerator)this.rollGenerator));
+        this.tabs.add("Jewelry Generator", new JewelryGeneratorPanel((org.mreposa.dmtools.generator.adnd.DiceRollGenerator)this.rollGenerator));
+        this.tabs.add("Magic Item Generator", new MagicItemGeneratorPanel((org.mreposa.dmtools.generator.adnd.DiceRollGenerator)this.rollGenerator));
     }
 
     @Override

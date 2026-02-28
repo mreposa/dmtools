@@ -1,8 +1,8 @@
 package org.mreposa.dmtools.view.adnd;
 
 import org.mreposa.dmtools.generator.adnd.DiceRollGenerator;
-import org.mreposa.dmtools.generator.adnd.GemGenerator;
-import org.mreposa.dmtools.model.adnd.gem.Gem;
+import org.mreposa.dmtools.generator.adnd.MagicItemGenerator;
+import org.mreposa.dmtools.model.adnd.magic.MagicItem;
 
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
@@ -11,21 +11,21 @@ import java.awt.*;
 import java.io.Serial;
 import java.util.List;
 
-public class AdndGemGeneratorPanel extends JPanel {
+public class MagicItemGeneratorPanel extends JPanel {
     @Serial
     private static final long serialVersionUID = 1L;
 
     private static final int PANEL_WIDTH = 1600;
     private static final int PANEL_HEIGHT = 1000;
 
-    private final GemGenerator gemGenerator;
-    private final JTextField gemCount;
+    private final MagicItemGenerator magicItemGenerator;
+    private final JTextField itemCount;
     private final JEditorPane display;
 
-    public AdndGemGeneratorPanel(DiceRollGenerator rollGenerator) {
+    public MagicItemGeneratorPanel(DiceRollGenerator rollGenerator) {
         super();
 
-        this.gemGenerator = new GemGenerator(rollGenerator);
+        this.magicItemGenerator = new MagicItemGenerator(rollGenerator);
 
         setLayout(new BorderLayout());
         Dimension d = new Dimension(PANEL_WIDTH, PANEL_HEIGHT);
@@ -38,9 +38,9 @@ public class AdndGemGeneratorPanel extends JPanel {
         JLabel label1 = new JLabel(labelText);
         selectionPanel.add(label1);
 
-        this.gemCount = new JTextField("1");
-        this.gemCount.setColumns(3);
-        selectionPanel.add(this.gemCount);
+        this.itemCount = new JTextField("1");
+        this.itemCount.setColumns(3);
+        selectionPanel.add(this.itemCount);
 
         JButton generateButton = new JButton("Generate");
         Dimension bd = new Dimension(90, 20);
@@ -66,11 +66,11 @@ public class AdndGemGeneratorPanel extends JPanel {
     }
 
     private void displayRoll() {
-        int gemCount = Integer.parseInt(this.gemCount.getText());
+        int itemCount = Integer.parseInt(this.itemCount.getText());
 
-        List<Gem> gems = this.gemGenerator.generate(gemCount);
+        List<MagicItem> magicItems = this.magicItemGenerator.generate(itemCount);
 
-        String output = getOutput(gems);
+        String output = getOutput(magicItems);
 
         try {
             Document doc = this.display.getDocument();
@@ -80,16 +80,13 @@ public class AdndGemGeneratorPanel extends JPanel {
         }
     }
 
-    private String getOutput(List<Gem> gems) {
+    private String getOutput(List<MagicItem> magicItems) {
         StringBuilder output = new StringBuilder();
         int a = 0;
-        for (Gem gem : gems) {
-            output.append(gem.getType());
-            output.append(" (");
-            output.append(gem.getBaseValue());
-            output.append(" gp)");
+        for (MagicItem magicItem : magicItems) {
+            output.append(magicItem.getName());
 
-            if (a < gems.size() - 1) {
+            if (a < magicItems.size() - 1) {
                 output.append(", ");
             }
 

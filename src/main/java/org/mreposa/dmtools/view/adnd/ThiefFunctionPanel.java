@@ -9,7 +9,7 @@ import javax.swing.text.Document;
 import java.awt.*;
 import java.io.Serial;
 
-public class AdndThiefFunctionPanel extends JPanel {
+public class ThiefFunctionPanel extends JPanel {
     @Serial
     private static final long serialVersionUID = 1L;
 
@@ -22,7 +22,7 @@ public class AdndThiefFunctionPanel extends JPanel {
     private final JComboBox<String> dexterity;
     private final JEditorPane display;
 
-    public AdndThiefFunctionPanel() {
+    public ThiefFunctionPanel() {
         super();
 
         setLayout(new BorderLayout());

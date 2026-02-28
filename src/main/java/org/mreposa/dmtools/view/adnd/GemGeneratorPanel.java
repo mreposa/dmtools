@@ -1,8 +1,8 @@
 package org.mreposa.dmtools.view.adnd;
 
 import org.mreposa.dmtools.generator.adnd.DiceRollGenerator;
-import org.mreposa.dmtools.generator.adnd.JewelryGenerator;
-import org.mreposa.dmtools.model.adnd.gem.Jewelry;
+import org.mreposa.dmtools.generator.adnd.GemGenerator;
+import org.mreposa.dmtools.model.adnd.gem.Gem;
 
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
@@ -11,21 +11,21 @@ import java.awt.*;
 import java.io.Serial;
 import java.util.List;
 
-public class AdndJewelryGeneratorPanel extends JPanel {
+public class GemGeneratorPanel extends JPanel {
     @Serial
     private static final long serialVersionUID = 1L;
 
     private static final int PANEL_WIDTH = 1600;
     private static final int PANEL_HEIGHT = 1000;
 
-    private final JewelryGenerator jewelryGenerator;
-    private final JTextField jewelryCount;
+    private final GemGenerator gemGenerator;
+    private final JTextField gemCount;
     private final JEditorPane display;
 
-    public AdndJewelryGeneratorPanel(DiceRollGenerator rollGenerator) {
+    public GemGeneratorPanel(DiceRollGenerator rollGenerator) {
         super();
 
-        this.jewelryGenerator = new JewelryGenerator(rollGenerator);
+        this.gemGenerator = new GemGenerator(rollGenerator);
 
         setLayout(new BorderLayout());
         Dimension d = new Dimension(PANEL_WIDTH, PANEL_HEIGHT);
@@ -38,9 +38,9 @@ public class AdndJewelryGeneratorPanel extends JPanel {
         JLabel label1 = new JLabel(labelText);
         selectionPanel.add(label1);
 
-        this.jewelryCount = new JTextField("1");
-        this.jewelryCount.setColumns(3);
-        selectionPanel.add(this.jewelryCount);
+        this.gemCount = new JTextField("1");
+        this.gemCount.setColumns(3);
+        selectionPanel.add(this.gemCount);
 
         JButton generateButton = new JButton("Generate");
         Dimension bd = new Dimension(90, 20);
@@ -66,11 +66,11 @@ public class AdndJewelryGeneratorPanel extends JPanel {
     }
 
     private void displayRoll() {
-        int jewelryCount = Integer.parseInt(this.jewelryCount.getText());
+        int gemCount = Integer.parseInt(this.gemCount.getText());
 
-        List<Jewelry> jewelryList = this.jewelryGenerator.generate(jewelryCount);
+        List<Gem> gems = this.gemGenerator.generate(gemCount);
 
-        String output = getOutput(jewelryList);
+        String output = getOutput(gems);
 
         try {
             Document doc = this.display.getDocument();
@@ -80,18 +80,16 @@ public class AdndJewelryGeneratorPanel extends JPanel {
         }
     }
 
-    private String getOutput(List<Jewelry> jewelryList) {
+    private String getOutput(List<Gem> gems) {
         StringBuilder output = new StringBuilder();
         int a = 0;
-        for (Jewelry jewelry : jewelryList) {
-            output.append(jewelry.getPiece());
+        for (Gem gem : gems) {
+            output.append(gem.getType());
             output.append(" (");
-            output.append(jewelry.getMake());
-            output.append(", ");
-            output.append(jewelry.getBaseValue());
+            output.append(gem.getBaseValue());
             output.append(" gp)");
 
-            if (a < jewelryList.size() - 1) {
+            if (a < gems.size() - 1) {
                 output.append(", ");
             }
 
