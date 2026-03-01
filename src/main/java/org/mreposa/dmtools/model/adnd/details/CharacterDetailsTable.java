@@ -7,7 +7,7 @@ public class CharacterDetailsTable {
     public static final String[] APPEARANCE = {"dirty", "clean", "unkempt", "immaculate", "rough", "ragged", "dandyish", "foppish", "non-descript", "imposing"};
     public static final String[] SANITY = {"very stable", "normal", "normal", "normal", "normal", "normal", "neurotic", "unstable", "insane", "maniacal"};
     public static final String[] TENDENCIES_1 = {"optimist", "pessimist", "hedonist", "altruist", "helpful/kindly", "careless", "capricious/mischievous", "sober", "curious/inquisitive", "moody", "trusting", "suspicious/cautious"};
-    public static final String[] TENDENCIES_2 = {"precise/excating", "perceptive", "opinionated/contrary", "violent/warlike", "studious", "foul/barbaric", "cruel/callous", "practical joker/prankster", "servile/obsequious", "fanatical/obsessive", "malevolent", "loquacious"};
+    public static final String[] TENDENCIES_2 = {"precise/exacting", "perceptive", "opinionated/contrary", "violent/warlike", "studious", "foul/barbaric", "cruel/callous", "practical joker/prankster", "servile/obsequious", "fanatical/obsessive", "malevolent", "loquacious"};
     public static final String[] PERSONALITY_1 = {"modest", "egoist/arrogant", "friendly", "aloof", "hostile", "well-spoken", "diplomatic", "abrasive"};
     public static final String[] PERSONALITY_2 = {"forceful", "overbearing", "friendly", "blustering", "antagonistic", "rude", "rash", "diplomatic"};
     public static final String[] PERSONALITY_3 = {"retiring", "taciturn", "friendly", "aloof", "hostile", "rude", "courteous", "solitary/secretive"};
