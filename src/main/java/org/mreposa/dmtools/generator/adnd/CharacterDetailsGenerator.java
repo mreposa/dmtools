@@ -3,7 +3,6 @@ package org.mreposa.dmtools.generator.adnd;
 import org.mreposa.dmtools.model.adnd.details.*;
 import org.mreposa.dmtools.model.roll.Roll;
 
-import java.util.Arrays;
 import java.util.HashSet;
 
 public class CharacterDetailsGenerator {
@@ -152,17 +151,17 @@ public class CharacterDetailsGenerator {
 
         /* HEIGHT AND WEIGHT */
 
-        double height = 0.0;
+        double height;
         boolean heightUnder = false;
         boolean heightOver = false;
         boolean avgHeightUnder = false;
         boolean avgHeightOver = false;
-        double weight = 0.0;
+        double weight;
         boolean weightUnder = false;
         boolean weightOver = false;
         boolean avgWeightUnder = false;
         boolean avgWeightOver = false;
-        double adjustmentRoll = 0.0;
+        double adjustmentRoll;
 
         roll = this.diceRollGenerator.roll(1, 100);
         int heightRoll = roll.getTotal();
@@ -208,13 +207,13 @@ public class CharacterDetailsGenerator {
 
                 if (heightUnder) {
                     roll = this.diceRollGenerator.roll(1, 4);
-                    adjustmentRoll = roll.getTotal();;
+                    adjustmentRoll = roll.getTotal();
 
                     height = height - adjustmentRoll;
                 }
                 else if (heightOver) {
                     roll = this.diceRollGenerator.roll(1, 4);
-                    adjustmentRoll = roll.getTotal();;
+                    adjustmentRoll = roll.getTotal();
 
                     height = height + adjustmentRoll;
                 }
@@ -232,13 +231,13 @@ public class CharacterDetailsGenerator {
 
                 if (weightUnder) {
                     roll = this.diceRollGenerator.roll(2, 8);
-                    adjustmentRoll = roll.getTotal();;
+                    adjustmentRoll = roll.getTotal();
 
                     weight = weight - adjustmentRoll;
                 }
                 else if (weightOver) {
                     roll = this.diceRollGenerator.roll(2, 10);
-                    adjustmentRoll = roll.getTotal();;
+                    adjustmentRoll = roll.getTotal();
 
                     weight = weight + adjustmentRoll;
                 }
@@ -260,13 +259,13 @@ public class CharacterDetailsGenerator {
 
                 if (heightUnder) {
                     roll = this.diceRollGenerator.roll(1, 4);
-                    adjustmentRoll = roll.getTotal();;
+                    adjustmentRoll = roll.getTotal();
 
                     height = height - adjustmentRoll;
                 }
                 else if (heightOver) {
                     roll = this.diceRollGenerator.roll(1, 6);
-                    adjustmentRoll = roll.getTotal();;
+                    adjustmentRoll = roll.getTotal();
 
                     height = height + adjustmentRoll;
                 }
@@ -284,13 +283,13 @@ public class CharacterDetailsGenerator {
 
                 if (weightUnder) {
                     roll = this.diceRollGenerator.roll(2, 8);
-                    adjustmentRoll = roll.getTotal();;
+                    adjustmentRoll = roll.getTotal();
 
                     weight = weight - adjustmentRoll;
                 }
                 else if (weightOver) {
                     roll = this.diceRollGenerator.roll(2, 12);
-                    adjustmentRoll = roll.getTotal();;
+                    adjustmentRoll = roll.getTotal();
 
                     weight = weight + adjustmentRoll;
                 }
@@ -344,13 +343,13 @@ public class CharacterDetailsGenerator {
 
                 if (heightUnder) {
                     roll = this.diceRollGenerator.roll(1, 4);
-                    adjustmentRoll = roll.getTotal();;
+                    adjustmentRoll = roll.getTotal();
 
                     height = height - adjustmentRoll;
                 }
                 else if (heightOver) {
                     roll = this.diceRollGenerator.roll(1, 6);
-                    adjustmentRoll = roll.getTotal();;
+                    adjustmentRoll = roll.getTotal();
 
                     height = height + adjustmentRoll;
                 }
@@ -368,13 +367,13 @@ public class CharacterDetailsGenerator {
 
                 if (weightUnder) {
                     roll = this.diceRollGenerator.roll(1, 10);
-                    adjustmentRoll = roll.getTotal();;
+                    adjustmentRoll = roll.getTotal();
 
                     weight = weight - adjustmentRoll;
                 }
                 else if (weightOver) {
                     roll = this.diceRollGenerator.roll(2, 6);
-                    adjustmentRoll = roll.getTotal();;
+                    adjustmentRoll = roll.getTotal();
 
                     weight = weight + adjustmentRoll;
                 }
@@ -396,13 +395,13 @@ public class CharacterDetailsGenerator {
 
                 if (heightUnder) {
                     roll = this.diceRollGenerator.roll(1, 4);
-                    adjustmentRoll = roll.getTotal();;
+                    adjustmentRoll = roll.getTotal();
 
                     height = height - adjustmentRoll;
                 }
                 else if (heightOver) {
                     roll = this.diceRollGenerator.roll(1, 6);
-                    adjustmentRoll = roll.getTotal();;
+                    adjustmentRoll = roll.getTotal();
 
                     height = height + adjustmentRoll;
                 }
@@ -420,13 +419,13 @@ public class CharacterDetailsGenerator {
 
                 if (weightUnder) {
                     roll = this.diceRollGenerator.roll(1, 10);
-                    adjustmentRoll = roll.getTotal();;
+                    adjustmentRoll = roll.getTotal();
 
                     weight = weight - adjustmentRoll;
                 }
                 else if (weightOver) {
                     roll = this.diceRollGenerator.roll(1, 20);
-                    adjustmentRoll = roll.getTotal();;
+                    adjustmentRoll = roll.getTotal();
 
                     weight = weight + adjustmentRoll;
                 }
@@ -480,13 +479,13 @@ public class CharacterDetailsGenerator {
 
                 if (heightUnder) {
                     roll = this.diceRollGenerator.roll(1, 3);
-                    adjustmentRoll = roll.getTotal();;
+                    adjustmentRoll = roll.getTotal();
 
                     height = height - adjustmentRoll;
                 }
                 else if (heightOver) {
                     roll = this.diceRollGenerator.roll(1, 3);
-                    adjustmentRoll = roll.getTotal();;
+                    adjustmentRoll = roll.getTotal();
 
                     height = height + adjustmentRoll;
                 }
@@ -504,13 +503,13 @@ public class CharacterDetailsGenerator {
 
                 if (weightUnder) {
                     roll = this.diceRollGenerator.roll(1, 8);
-                    adjustmentRoll = roll.getTotal();;
+                    adjustmentRoll = roll.getTotal();
 
                     weight = weight - adjustmentRoll;
                 }
                 else if (weightOver) {
                     roll = this.diceRollGenerator.roll(1, 8);
-                    adjustmentRoll = roll.getTotal();;
+                    adjustmentRoll = roll.getTotal();
 
                     weight = weight + adjustmentRoll;
                 }
@@ -532,13 +531,13 @@ public class CharacterDetailsGenerator {
 
                 if (heightUnder) {
                     roll = this.diceRollGenerator.roll(1, 3);
-                    adjustmentRoll = roll.getTotal();;
+                    adjustmentRoll = roll.getTotal();
 
                     height = height - adjustmentRoll;
                 }
                 else if (heightOver) {
                     roll = this.diceRollGenerator.roll(1, 3);
-                    adjustmentRoll = roll.getTotal();;
+                    adjustmentRoll = roll.getTotal();
 
                     height = height + adjustmentRoll;
                 }
@@ -556,13 +555,13 @@ public class CharacterDetailsGenerator {
 
                 if (weightUnder) {
                     roll = this.diceRollGenerator.roll(2, 4);
-                    adjustmentRoll = roll.getTotal();;
+                    adjustmentRoll = roll.getTotal();
 
                     weight = weight - adjustmentRoll;
                 }
                 else if (weightOver) {
                     roll = this.diceRollGenerator.roll(2, 6);
-                    adjustmentRoll = roll.getTotal();;
+                    adjustmentRoll = roll.getTotal();
 
                     weight = weight + adjustmentRoll;
                 }
@@ -616,13 +615,13 @@ public class CharacterDetailsGenerator {
 
                 if (heightUnder) {
                     roll = this.diceRollGenerator.roll(1, 6);
-                    adjustmentRoll = roll.getTotal();;
+                    adjustmentRoll = roll.getTotal();
 
                     height = height - adjustmentRoll;
                 }
                 else if (heightOver) {
                     roll = this.diceRollGenerator.roll(1, 6);
-                    adjustmentRoll = roll.getTotal();;
+                    adjustmentRoll = roll.getTotal();
 
                     height = height + adjustmentRoll;
                 }
@@ -640,13 +639,13 @@ public class CharacterDetailsGenerator {
 
                 if (weightUnder) {
                     roll = this.diceRollGenerator.roll(1, 12);
-                    adjustmentRoll = roll.getTotal();;
+                    adjustmentRoll = roll.getTotal();
 
                     weight = weight - adjustmentRoll;
                 }
                 else if (weightOver) {
                     roll = this.diceRollGenerator.roll(2, 8);
-                    adjustmentRoll = roll.getTotal();;
+                    adjustmentRoll = roll.getTotal();
 
                     weight = weight + adjustmentRoll;
                 }
@@ -668,13 +667,13 @@ public class CharacterDetailsGenerator {
 
                 if (heightUnder) {
                     roll = this.diceRollGenerator.roll(1, 6);
-                    adjustmentRoll = roll.getTotal();;
+                    adjustmentRoll = roll.getTotal();
 
                     height = height - adjustmentRoll;
                 }
                 else if (heightOver) {
                     roll = this.diceRollGenerator.roll(1, 6);
-                    adjustmentRoll = roll.getTotal();;
+                    adjustmentRoll = roll.getTotal();
 
                     height = height + adjustmentRoll;
                 }
@@ -692,13 +691,13 @@ public class CharacterDetailsGenerator {
 
                 if (weightUnder) {
                     roll = this.diceRollGenerator.roll(1, 20);
-                    adjustmentRoll = roll.getTotal();;
+                    adjustmentRoll = roll.getTotal();
 
                     weight = weight - adjustmentRoll;
                 }
                 else if (weightOver) {
                     roll = this.diceRollGenerator.roll(1, 20);
-                    adjustmentRoll = roll.getTotal();;
+                    adjustmentRoll = roll.getTotal();
 
                     weight = weight + adjustmentRoll;
                 }
@@ -752,13 +751,13 @@ public class CharacterDetailsGenerator {
 
                 if (heightUnder) {
                     roll = this.diceRollGenerator.roll(1, 3);
-                    adjustmentRoll = roll.getTotal();;
+                    adjustmentRoll = roll.getTotal();
 
                     height = height - adjustmentRoll;
                 }
                 else if (heightOver) {
                     roll = this.diceRollGenerator.roll(1, 3);
-                    adjustmentRoll = roll.getTotal();;
+                    adjustmentRoll = roll.getTotal();
 
                     height = height + adjustmentRoll;
                 }
@@ -776,13 +775,13 @@ public class CharacterDetailsGenerator {
 
                 if (weightUnder) {
                     roll = this.diceRollGenerator.roll(2, 4);
-                    adjustmentRoll = roll.getTotal();;
+                    adjustmentRoll = roll.getTotal();
 
                     weight = weight - adjustmentRoll;
                 }
                 else if (weightOver) {
                     roll = this.diceRollGenerator.roll(2, 4);
-                    adjustmentRoll = roll.getTotal();;
+                    adjustmentRoll = roll.getTotal();
 
                     weight = weight + adjustmentRoll;
                 }
@@ -804,13 +803,13 @@ public class CharacterDetailsGenerator {
 
                 if (heightUnder) {
                     roll = this.diceRollGenerator.roll(1, 3);
-                    adjustmentRoll = roll.getTotal();;
+                    adjustmentRoll = roll.getTotal();
 
                     height = height - adjustmentRoll;
                 }
                 else if (heightOver) {
                     roll = this.diceRollGenerator.roll(1, 6);
-                    adjustmentRoll = roll.getTotal();;
+                    adjustmentRoll = roll.getTotal();
 
                     height = height + adjustmentRoll;
                 }
@@ -828,13 +827,13 @@ public class CharacterDetailsGenerator {
 
                 if (weightUnder) {
                     roll = this.diceRollGenerator.roll(2, 4);
-                    adjustmentRoll = roll.getTotal();;
+                    adjustmentRoll = roll.getTotal();
 
                     weight = weight - adjustmentRoll;
                 }
                 else if (weightOver) {
                     roll = this.diceRollGenerator.roll(2, 6);
-                    adjustmentRoll = roll.getTotal();;
+                    adjustmentRoll = roll.getTotal();
 
                     weight = weight + adjustmentRoll;
                 }
@@ -888,13 +887,13 @@ public class CharacterDetailsGenerator {
 
                 if (heightUnder) {
                     roll = this.diceRollGenerator.roll(1, 3);
-                    adjustmentRoll = roll.getTotal();;
+                    adjustmentRoll = roll.getTotal();
 
                     height = height - adjustmentRoll;
                 }
                 else if (heightOver) {
                     roll = this.diceRollGenerator.roll(1, 3);
-                    adjustmentRoll = roll.getTotal();;
+                    adjustmentRoll = roll.getTotal();
 
                     height = height + adjustmentRoll;
                 }
@@ -912,13 +911,13 @@ public class CharacterDetailsGenerator {
 
                 if (weightUnder) {
                     roll = this.diceRollGenerator.roll(3, 6);
-                    adjustmentRoll = roll.getTotal();;
+                    adjustmentRoll = roll.getTotal();
 
                     weight = weight - adjustmentRoll;
                 }
                 else if (weightOver) {
                     roll = this.diceRollGenerator.roll(4, 8);
-                    adjustmentRoll = roll.getTotal();;
+                    adjustmentRoll = roll.getTotal();
 
                     weight = weight + adjustmentRoll;
                 }
@@ -940,13 +939,13 @@ public class CharacterDetailsGenerator {
 
                 if (heightUnder) {
                     roll = this.diceRollGenerator.roll(1, 4);
-                    adjustmentRoll = roll.getTotal();;
+                    adjustmentRoll = roll.getTotal();
 
                     height = height - adjustmentRoll;
                 }
                 else if (heightOver) {
                     roll = this.diceRollGenerator.roll(1, 4);
-                    adjustmentRoll = roll.getTotal();;
+                    adjustmentRoll = roll.getTotal();
 
                     height = height + adjustmentRoll;
                 }
@@ -964,13 +963,13 @@ public class CharacterDetailsGenerator {
 
                 if (weightUnder) {
                     roll = this.diceRollGenerator.roll(2, 8);
-                    adjustmentRoll = roll.getTotal();;
+                    adjustmentRoll = roll.getTotal();
 
                     weight = weight - adjustmentRoll;
                 }
                 else if (weightOver) {
                     roll = this.diceRollGenerator.roll(4, 10);
-                    adjustmentRoll = roll.getTotal();;
+                    adjustmentRoll = roll.getTotal();
 
                     weight = weight + adjustmentRoll;
                 }
@@ -1024,13 +1023,13 @@ public class CharacterDetailsGenerator {
 
                 if (heightUnder) {
                     roll = this.diceRollGenerator.roll(1, 6);
-                    adjustmentRoll = roll.getTotal();;
+                    adjustmentRoll = roll.getTotal();
 
                     height = height - adjustmentRoll;
                 }
                 else if (heightOver) {
                     roll = this.diceRollGenerator.roll(1, 8);
-                    adjustmentRoll = roll.getTotal();;
+                    adjustmentRoll = roll.getTotal();
 
                     height = height + adjustmentRoll;
                 }
@@ -1048,13 +1047,13 @@ public class CharacterDetailsGenerator {
 
                 if (weightUnder) {
                     roll = this.diceRollGenerator.roll(3, 10);
-                    adjustmentRoll = roll.getTotal();;
+                    adjustmentRoll = roll.getTotal();
 
                     weight = weight - adjustmentRoll;
                 }
                 else if (weightOver) {
                     roll = this.diceRollGenerator.roll(4, 12);
-                    adjustmentRoll = roll.getTotal();;
+                    adjustmentRoll = roll.getTotal();
 
                     weight = weight + adjustmentRoll;
                 }
@@ -1076,13 +1075,13 @@ public class CharacterDetailsGenerator {
 
                 if (heightUnder) {
                     roll = this.diceRollGenerator.roll(1, 12);
-                    adjustmentRoll = roll.getTotal();;
+                    adjustmentRoll = roll.getTotal();
 
                     height = height - adjustmentRoll;
                 }
                 else if (heightOver) {
                     roll = this.diceRollGenerator.roll(1, 12);
-                    adjustmentRoll = roll.getTotal();;
+                    adjustmentRoll = roll.getTotal();
 
                     height = height + adjustmentRoll;
                 }
@@ -1100,13 +1099,13 @@ public class CharacterDetailsGenerator {
 
                 if (weightUnder) {
                     roll = this.diceRollGenerator.roll(3, 12);
-                    adjustmentRoll = roll.getTotal();;
+                    adjustmentRoll = roll.getTotal();
 
                     weight = weight - adjustmentRoll;
                 }
                 else if (weightOver) {
                     roll = this.diceRollGenerator.roll(5, 12);
-                    adjustmentRoll = roll.getTotal();;
+                    adjustmentRoll = roll.getTotal();
 
                     weight = weight + adjustmentRoll;
                 }
