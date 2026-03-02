@@ -6,9 +6,14 @@ DM Tools uses tables and data from the Advanced Dungeons and Dragons 1st edition
 
 ## Building dmtools
 To build the project on your machine you will need to install Java, Git, and Maven.
-To generate an executable JAR file, clone this project and use the following command:
+To generate an executable JAR file, clone this project and use the following commands:
 ```
+cd dmtools
 mvn clean package
+```
+The executable JAR file will be found in:
+```
+dmtools\target
 ```
 Double-click the JAR file to start the program.
 
