@@ -25,6 +25,8 @@ public class CharacterDetailsTable {
     public static final String[] INTERESTS_2 = {"wines and spirits", "foods and preparation", "gambling", "drugs", "collector", "collector", "collector", "collector", "community service", "altruism", "none", "none"};
     public static final String[] COLLECTIONS = {"knives and daggers", "swords", "weapons", "shields and weapons", "armor", "books and scrolls", "minerals and gems", "ornaments and jewelry", "coins and tokens", "trophies and skins", "porcelain, china, crystal", "artwork"};
 
+    public static final String[] INSANITIES = {"dipsomania", "kleptomania", "schizoid", "pathological liar", "monomania", "dementia praecox", "melancholia", "megalomania", "delusional insanity", "schizophrenia", "mania", "lunacy", "paranoia", "manic-depressive", "hallucinatory insanity", "sado-masochism", "homicidal mania", "hebephrenia", "suicidal mania", "catatonia"};
+
     public static final int TENDENCIES_COUNT = 3;
 
     public static final String[] RACE = {"Dwarf", "Elf", "Gnome", "Half-Elf", "Halfling", "Half-Orc", "Human"};

@@ -40,14 +40,21 @@ public class CharacterDetailsGenerator {
         rollValue = roll.getTotal() - 1;
         details.setAppearance(CharacterDetailsTable.APPEARANCE[rollValue]);
 
+        String insanity = "";
         roll = this.diceRollGenerator.roll(1, 10);
         rollValue = roll.getTotal() - 1;
         if (rollValue == 8 || rollValue == 9) {
             // Re-roll insane or maniacal; only use these if they come up a second time
             roll = this.diceRollGenerator.roll(1, 10);
             rollValue = roll.getTotal() - 1;
+
+            if (rollValue == 8) {
+                // Roll type of insanity
+                roll = this.diceRollGenerator.roll(1, 20);
+                insanity = " (" + CharacterDetailsTable.INSANITIES[(roll.getTotal() - 1)] + ")";
+            }
         }
-        details.setSanity(CharacterDetailsTable.SANITY[rollValue]);
+        details.setSanity(CharacterDetailsTable.SANITY[rollValue] + insanity);
 
         /* TRAITS */
 
