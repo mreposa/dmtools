@@ -24,7 +24,7 @@ public class MiscWeaponH2 extends MagicItemTable {
             itemName = "arrow +4 (" + count + ")";
         }
         else if (roll == 3) {
-            itemName = "axe +4";
+            itemName = "hand axe +4";
         }
         else if (roll == 4) {
             dieRoll = this.diceRollGenerator.roll(1, 20);
@@ -279,6 +279,10 @@ public class MiscWeaponH2 extends MagicItemTable {
         }
         else {
             itemName = "spear +5";
+        }
+
+        if (itemName.startsWith("scimitar")) {
+            itemName = itemName.replaceFirst("scimitar", getScimitarType());
         }
 
         return itemName;

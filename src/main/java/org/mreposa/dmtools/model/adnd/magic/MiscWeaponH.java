@@ -122,16 +122,16 @@ public class MiscWeaponH extends MagicItemTable {
             itemName = "arrow of slaying (" + type + ")";
         }
         else if (roll < 21) {
-            itemName = "axe +1";
+            itemName = "hand axe +1";
         }
         else if (roll < 23) {
-            itemName = "axe +2";
+            itemName = "hand axe +2";
         }
         else if (roll == 23) {
             itemName = "throwing axe +2";
         }
         else if (roll == 24) {
-            itemName = "axe +3";
+            itemName = "hand axe +3";
         }
         else if (roll < 28) {
             itemName = "battle axe +1";
@@ -215,10 +215,20 @@ public class MiscWeaponH extends MagicItemTable {
             itemName = "spear +3";
         }
         else if (roll < 100) {
-            itemName = "spear cursed backbiter";
+            itemName = "spear (cursed backbiter)";
         }
         else {
             itemName = "trident +3";
+        }
+
+        if (itemName.startsWith("scimitar")) {
+            itemName = itemName.replaceFirst("scimitar", getScimitarType());
+        }
+        else if (itemName.startsWith("bow")) {
+            itemName = getBowType() + " " + itemName;
+        }
+        else if (itemName.startsWith("crossbow")) {
+            itemName = getCrossbowType() + " " + itemName;
         }
 
         return itemName;

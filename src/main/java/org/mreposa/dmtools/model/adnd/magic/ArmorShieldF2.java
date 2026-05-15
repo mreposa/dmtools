@@ -94,6 +94,13 @@ public class ArmorShieldF2 extends MagicItemTable {
             itemName = itemName + "studded leather +2";
         }
 
+        if (itemName.startsWith("elfin chain mail")) {
+            itemName = itemName + " " + getElfinChainSize();
+        }
+        else if (!itemName.startsWith("buckler")) {
+            itemName = itemName + " " + getArmorSize();
+        }
+
         return itemName;
     }
 }

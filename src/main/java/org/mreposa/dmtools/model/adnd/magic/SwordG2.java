@@ -22,28 +22,28 @@ public class SwordG2 extends MagicItemTable {
             itemName = "anything sword";
         }
         else if (roll < 33) {
-            itemName = "broad sword final word";
+            itemName = "broad sword (final word)";
         }
         else if (roll < 46) {
             itemName = "sword of dancing";
         }
         else if (roll == 62) {
-            itemName = "sword +5 defender";
+            itemName = "sword +5 (defender)";
         }
         else if (roll < 70) {
-            itemName = "sword +6 defender";
+            itemName = "sword +6 (defender)";
         }
         else if (roll < 85) {
-            itemName = "sword +5 holy avenger";
+            itemName = "sword +5 (holy avenger)";
         }
         else if (roll == 92) {
-            itemName = "sword +6 holy avenger";
+            itemName = "sword +6 (holy avenger)";
         }
         else if (roll < 94) {
             itemName = "sword of life stealing";
         }
         else if (roll < 96) {
-            itemName = "sword +2 nine lives stealer";
+            itemName = "sword +2 (nine lives stealer)";
         }
         else if (roll < 98) {
             itemName = "sword of sharpness";
@@ -53,6 +53,10 @@ public class SwordG2 extends MagicItemTable {
         }
         else {
             itemName = "sword of wounding";
+        }
+
+        if (itemName.startsWith("sword") || itemName.startsWith("anything") || itemName.startsWith("vorpal")) {
+            itemName = itemName.replaceFirst("sword", getSwordType());
         }
 
         return itemName;

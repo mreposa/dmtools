@@ -88,10 +88,14 @@ public class ArmorShieldF extends MagicItemTable {
             itemName = "shield +5";
         }
         else if (roll == 97) {
-            itemName = "shield, large +1 (+4 vs. missiles)";
+            itemName = "large shield +1 (+4 vs. missiles)";
         }
         else {
             itemName = itemName + "shield -1 (missile attractor)";
+        }
+
+        if (!itemName.startsWith("shield")) {
+            itemName = itemName + " " + getArmorSize();
         }
 
         return itemName;
