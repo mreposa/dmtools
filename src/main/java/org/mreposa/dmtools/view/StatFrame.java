@@ -20,14 +20,13 @@ public abstract class StatFrame extends JFrame {
     private static final int PANEL_HEIGHT = 1000;
 
     private final JMenuBar menuBar;
-    private final JComboBox<String> charClass;
     private final JComboBox<String> charRace;
     protected JPanel methodPanel;
     protected ButtonGroup methodButtonGroup;
     protected final JEditorPane display;
     protected StatGenerator statGenerator;
     protected DiceRollGenerator rollGenerator;
-    protected String selectedClass;
+    protected String selectedClass = PlayerCharacterClass.AVAILABLE_CLASSES[14];
     protected String selectedRace;
     protected String selectedMethod = "NONE";
     protected JTabbedPane tabs;
@@ -69,13 +68,6 @@ public abstract class StatFrame extends JFrame {
 
         classPanel = new JPanel();
         classPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-
-        JLabel label1 = new JLabel("Class:");
-        classPanel.add(label1);
-
-        this.charClass = new JComboBox<>(PlayerCharacterClass.AVAILABLE_CLASSES);
-        this.charClass.setSelectedIndex(0);
-        classPanel.add(this.charClass);
 
         JLabel label2 = new JLabel("Race:");
         classPanel.add(label2);
@@ -129,7 +121,6 @@ public abstract class StatFrame extends JFrame {
     }
 
      private void generateAndDisplayStats() {
-        this.selectedClass = (String)this.charClass.getSelectedItem();
         this.selectedRace = (String)this.charRace.getSelectedItem();
         this.selectedMethod = this.methodButtonGroup.getSelection().getActionCommand();
 
