@@ -3,6 +3,8 @@ package org.mreposa.dmtools.model.adnd.magic;
 import org.mreposa.dmtools.generator.adnd.DiceRollGenerator;
 
 public abstract class MagicItemTable {
+    public static final String[] MAGIC_ITEM_TYPES = {"Random", "Potion", "Scroll", "Ring", "Rod/Staff", "Wand", "Misc Magic", "Armor/Shield", "Sword", "Misc Weapon"};
+
     protected DiceRollGenerator diceRollGenerator;
 
     public MagicItemTable(DiceRollGenerator diceRollGenerator) {

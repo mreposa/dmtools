@@ -3,6 +3,8 @@ package org.mreposa.dmtools.view.adnd;
 import org.mreposa.dmtools.generator.adnd.DiceRollGenerator;
 import org.mreposa.dmtools.generator.adnd.MagicItemGenerator;
 import org.mreposa.dmtools.model.adnd.magic.MagicItem;
+import org.mreposa.dmtools.model.adnd.magic.MagicItemTable;
+import org.mreposa.dmtools.model.adnd.treasure.TreasureType;
 
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
@@ -20,6 +22,7 @@ public class MagicItemGeneratorPanel extends JPanel {
 
     private final MagicItemGenerator magicItemGenerator;
     private final JTextField itemCount;
+    private final JComboBox<String> itemType;
     private final JEditorPane display;
 
     public MagicItemGeneratorPanel(DiceRollGenerator rollGenerator) {
@@ -41,6 +44,13 @@ public class MagicItemGeneratorPanel extends JPanel {
         this.itemCount = new JTextField("1");
         this.itemCount.setColumns(3);
         selectionPanel.add(this.itemCount);
+
+        JLabel label2 = new JLabel("Magic Item Type:");
+        selectionPanel.add(label2);
+
+        this.itemType = new JComboBox<>(MagicItemTable.MAGIC_ITEM_TYPES);
+        this.itemType.setSelectedIndex(0);
+        selectionPanel.add(this.itemType);
 
         JButton generateButton = new JButton("Generate");
         Dimension bd = new Dimension(90, 20);
@@ -67,8 +77,9 @@ public class MagicItemGeneratorPanel extends JPanel {
 
     private void displayRoll() {
         int itemCount = Integer.parseInt(this.itemCount.getText());
+        String itemType = MagicItemTable.MAGIC_ITEM_TYPES[this.itemType.getSelectedIndex()];
 
-        List<MagicItem> magicItems = this.magicItemGenerator.generate(itemCount);
+        List<MagicItem> magicItems = this.magicItemGenerator.generate(itemCount, itemType);
 
         String output = getOutput(magicItems);
 
