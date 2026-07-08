@@ -35,6 +35,7 @@ public abstract class PlayerCharacterClass {
     public static final int DEFAULT_STAT_VALUE = 3;
     protected static final int DEFAULT_EX_STR_VALUE = 0;
     protected int[] minimums;
+    protected int[] priorities;
 
     public PlayerCharacterClass() {
         minimums = new int[AVAILABLE_STATS.length];
@@ -47,9 +48,13 @@ public abstract class PlayerCharacterClass {
                 minimums[a] = DEFAULT_STAT_VALUE;
             }
         }
+
+        priorities = new int[AVAILABLE_STATS.length];
     }
 
     public abstract int[] getMinimums();
+
+    public abstract int[] getPriorities();
 
     public static PlayerCharacterClass getPlayerCharacterClass(String selectedClass) {
         PlayerCharacterClass pcClass = null;

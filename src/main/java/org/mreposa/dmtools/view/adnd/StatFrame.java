@@ -48,7 +48,7 @@ public class StatFrame extends org.mreposa.dmtools.view.StatFrame {
             output.append(" ");
             output.append(stats[PlayerCharacterClass.STAT_STR]);
 
-            // Display Exceptional ST value for Fighter, Ranger, Paladin, Cavalier, Cavalier Paladin, and Barbarian
+            // Display Exceptional ST value
             if (stats[PlayerCharacterClass.STAT_STR] == PlayerCharacterClass.MAX_STAT_VALUE &&
                     (this.selectedClass.equals(PlayerCharacterClass.AVAILABLE_CLASSES[PlayerCharacterClass.CLASS_FIGHTER]) ||
                             this.selectedClass.equals(PlayerCharacterClass.AVAILABLE_CLASSES[PlayerCharacterClass.CLASS_RANGER]) ||

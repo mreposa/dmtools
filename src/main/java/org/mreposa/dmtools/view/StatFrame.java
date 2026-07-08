@@ -21,12 +21,13 @@ public abstract class StatFrame extends JFrame {
 
     private final JMenuBar menuBar;
     private final JComboBox<String> charRace;
+    private final JComboBox<String> charClass;
     protected JPanel methodPanel;
     protected ButtonGroup methodButtonGroup;
     protected final JEditorPane display;
     protected StatGenerator statGenerator;
     protected DiceRollGenerator rollGenerator;
-    protected String selectedClass = PlayerCharacterClass.AVAILABLE_CLASSES[14];
+    protected String selectedClass;
     protected String selectedRace;
     protected String selectedMethod = "NONE";
     protected JTabbedPane tabs;
@@ -76,6 +77,13 @@ public abstract class StatFrame extends JFrame {
         this.charRace.setSelectedIndex(0);
         classPanel.add(this.charRace);
 
+        JLabel label3 = new JLabel("Class:");
+        classPanel.add(label3);
+
+        this.charClass = new JComboBox<>(PlayerCharacterClass.AVAILABLE_CLASSES);
+        this.charClass.setSelectedIndex(0);
+        classPanel.add(this.charClass);
+
         generateButton = new JButton("Generate Stats");
         Dimension bd = new Dimension(145, 20);
         generateButton.setSize(bd);
@@ -94,8 +102,8 @@ public abstract class StatFrame extends JFrame {
 
         this.methodPanel = new JPanel();
         this.methodPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-        JLabel label3 = new JLabel("Rolling Method:");
-        this.methodPanel.add(label3);
+        JLabel label4 = new JLabel("Rolling Method:");
+        this.methodPanel.add(label4);
         this.methodButtonGroup = new ButtonGroup();
 
         topPanel = new JPanel();
@@ -123,6 +131,7 @@ public abstract class StatFrame extends JFrame {
      private void generateAndDisplayStats() {
         this.selectedRace = (String)this.charRace.getSelectedItem();
         this.selectedMethod = this.methodButtonGroup.getSelection().getActionCommand();
+        this.selectedClass = (String)this.charClass.getSelectedItem();
 
         int[] stats = this.statGenerator.generate(this.selectedClass, this.selectedRace, this.selectedMethod);
         String displayStats = formatStats(stats);
