@@ -70,6 +70,10 @@ public class TreasureGenerator {
                 roll = this.diceRollGenerator.roll(1, maxCoins);
                 amount = roll.getTotal();
 
+                if (amount > maxCoins) {
+                    amount = maxCoins;
+                }
+
                 genTreasure = new GeneratedTreasure();
                 genTreasure.setAmount(amount);
                 genTreasure.setType(coinType);
