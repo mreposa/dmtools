@@ -3,7 +3,9 @@ package org.mreposa.dmtools.generator.adnd;
 import org.mreposa.dmtools.model.adnd.details.*;
 import org.mreposa.dmtools.model.roll.Roll;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 
 public class CharacterDetailsGenerator {
     private final DiceRollGenerator diceRollGenerator;
@@ -1133,6 +1135,110 @@ public class CharacterDetailsGenerator {
         details.setHeight(height);
         details.setWeight(weight);
 
+        List<String> secondarySkills = secondarySkills();
+        details.setSecondarySkills(secondarySkills);
+
         return details;
+    }
+
+    private List<String> secondarySkills() {
+        ArrayList<String> skills = new ArrayList<>();
+        String skill = rollSecondarySkill();
+
+        if (!skill.equals(CharacterDetailsTable.SECONDARY_SKILLS[22])) {
+            skills.add(skill);
+        }
+        else {
+            // Roll for two skills
+            int count = 0;
+            while (count < 2) {
+                skill = rollSecondarySkill();
+                if (!skill.equals(CharacterDetailsTable.SECONDARY_SKILLS[21]) && !skill.equals(CharacterDetailsTable.SECONDARY_SKILLS[22])) {
+                    skills.add(skill);
+                    count++;
+                }
+            }
+        }
+
+        return skills;
+    }
+
+    private String rollSecondarySkill() {
+        String skill = "unknown";
+
+        Roll roll = this.diceRollGenerator.roll(1, 100);
+        int total = roll.getTotal();
+
+        if (total < 3) {
+            skill = CharacterDetailsTable.SECONDARY_SKILLS[0];
+        }
+        else if (total < 5) {
+            skill = CharacterDetailsTable.SECONDARY_SKILLS[1];
+        }
+        else if (total < 11) {
+            skill = CharacterDetailsTable.SECONDARY_SKILLS[2];
+        }
+        else if (total < 15) {
+            skill = CharacterDetailsTable.SECONDARY_SKILLS[3];
+        }
+        else if (total < 21) {
+            skill = CharacterDetailsTable.SECONDARY_SKILLS[4];
+        }
+        else if (total < 24) {
+            skill = CharacterDetailsTable.SECONDARY_SKILLS[5];
+        }
+        else if (total < 28) {
+            skill = CharacterDetailsTable.SECONDARY_SKILLS[6];
+        }
+        else if (total < 33) {
+            skill = CharacterDetailsTable.SECONDARY_SKILLS[7];
+        }
+        else if (total < 35) {
+            skill = CharacterDetailsTable.SECONDARY_SKILLS[8];
+        }
+        else if (total < 38) {
+            skill = CharacterDetailsTable.SECONDARY_SKILLS[9];
+        }
+        else if (total < 40) {
+            skill = CharacterDetailsTable.SECONDARY_SKILLS[10];
+        }
+        else if (total < 43) {
+            skill = CharacterDetailsTable.SECONDARY_SKILLS[11];
+        }
+        else if (total < 45) {
+            skill = CharacterDetailsTable.SECONDARY_SKILLS[12];
+        }
+        else if (total < 47) {
+            skill = CharacterDetailsTable.SECONDARY_SKILLS[13];
+        }
+        else if (total < 50) {
+            skill = CharacterDetailsTable.SECONDARY_SKILLS[14];
+        }
+        else if (total < 52) {
+            skill = CharacterDetailsTable.SECONDARY_SKILLS[15];
+        }
+        else if (total < 55) {
+            skill = CharacterDetailsTable.SECONDARY_SKILLS[16];
+        }
+        else if (total < 58) {
+            skill = CharacterDetailsTable.SECONDARY_SKILLS[17];
+        }
+        else if (total < 61) {
+            skill = CharacterDetailsTable.SECONDARY_SKILLS[18];
+        }
+        else if (total < 65) {
+            skill = CharacterDetailsTable.SECONDARY_SKILLS[19];
+        }
+        else if (total < 68) {
+            skill = CharacterDetailsTable.SECONDARY_SKILLS[20];
+        }
+        else if (total < 86) {
+            skill = CharacterDetailsTable.SECONDARY_SKILLS[21];
+        }
+        else {
+            skill = CharacterDetailsTable.SECONDARY_SKILLS[22];
+        }
+
+        return skill;
     }
 }

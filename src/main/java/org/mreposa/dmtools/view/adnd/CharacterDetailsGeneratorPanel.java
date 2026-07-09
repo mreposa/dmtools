@@ -5,6 +5,7 @@ import org.mreposa.dmtools.generator.adnd.CharacterDetailsGenerator;
 import org.mreposa.dmtools.model.adnd.details.CharacterDetails;
 import org.mreposa.dmtools.model.adnd.details.CharacterDetailsTable;
 
+import java.util.List;
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
@@ -102,6 +103,19 @@ public class CharacterDetailsGeneratorPanel extends JPanel {
         output.append(characterDetails.getWeight());
         output.append(" lbs\n");
 
+        output.append("Secondary Skill(s): ");
+        List<String> skills = characterDetails.getSecondarySkills();
+        for (String skill : skills) {
+            output.append(skill);
+
+            if (a < skills.size() - 1) {
+                output.append(", ");
+            }
+
+            a++;
+        }
+        output.append("\n");
+
         output.append("Alignment: ");
         output.append(characterDetails.getAlignment());
         output.append("\n");
@@ -122,6 +136,7 @@ public class CharacterDetailsGeneratorPanel extends JPanel {
         output.append(characterDetails.getSanity());
         output.append("\n");
 
+        a = 0;
         String[] tendencies = characterDetails.getTendencies();
         output.append("General Tendencies: ");
         for (String tendency : tendencies) {

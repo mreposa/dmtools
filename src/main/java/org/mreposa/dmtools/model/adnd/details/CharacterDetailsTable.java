@@ -27,6 +27,8 @@ public class CharacterDetailsTable {
 
     public static final String[] INSANITIES = {"dipsomania", "kleptomania", "schizoid", "pathological liar", "monomania", "dementia praecox", "melancholia", "megalomania", "delusional insanity", "schizophrenia", "mania", "lunacy", "paranoia", "manic-depressive", "hallucinatory insanity", "sado-masochism", "homicidal mania", "hebephrenia", "suicidal mania", "catatonia"};
 
+    public static final String[] SECONDARY_SKILLS = {"armorer", "bowyer/fletcher", "farmer/gardener", "fisher (netting)", "forester", "gambler", "hunter/fisher (hook and line)", "husbandman (animal husbandry)", "jeweler/lapidary", "leather worker/tanner", "limner/painter", "mason/carpenter", "miner", "navigator (fresh or salt water)", "sailor (fresh or salt water)", "shipwright (boats or ships)", "tailor/weaver", "teamster/freighter", "trader/barterer", "trapper/furrier", "woodworker/cabinetmaker", "No skill of measurable worth", "Roll twice ignoring this result hereafter"};
+
     public static final int TENDENCIES_COUNT = 3;
 
     public static final String[] RACE = {"Dwarf", "Elf", "Gnome", "Half-Elf", "Halfling", "Half-Orc", "Human"};

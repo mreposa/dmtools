@@ -1,5 +1,8 @@
 package org.mreposa.dmtools.model.adnd.details;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class CharacterDetails {
     private double height;
     private double weight;
@@ -21,9 +24,11 @@ public class CharacterDetails {
     private String morals;
     private String piety;
     private String interests;
+    private final List<String> secondarySkills;
 
     public CharacterDetails() {
         this.tendencies = new String[3];
+        this.secondarySkills = new ArrayList<String>();
     }
 
     public double getHeight() {
@@ -185,4 +190,8 @@ public class CharacterDetails {
     public void setInterests(String interests) {
         this.interests = interests;
     }
+
+    public List<String> getSecondarySkills() { return secondarySkills; }
+
+    public void setSecondarySkills(List<String> skills) { this.secondarySkills.addAll(skills); }
 }
