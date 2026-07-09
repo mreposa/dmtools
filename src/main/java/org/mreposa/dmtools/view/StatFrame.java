@@ -31,6 +31,7 @@ public abstract class StatFrame extends JFrame {
     protected String selectedClass;
     protected String selectedRace;
     protected String selectedMethod = "NONE";
+    protected JCheckBox sortScores;
     protected JTabbedPane tabs;
 
     public StatFrame(StatGenerator statGenerator, DiceRollGenerator rollGenerator) {
@@ -110,6 +111,9 @@ public abstract class StatFrame extends JFrame {
         this.notesPanel = new JPanel();
         this.notesPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
 
+        this.sortScores = new JCheckBox("Sort Scores by Class", true);
+        this.notesPanel.add(sortScores);
+
         topPanel = new JPanel();
         topPanel.setLayout(new GridLayout(3, 1));
         topPanel.add(classPanel);
@@ -138,7 +142,7 @@ public abstract class StatFrame extends JFrame {
         this.selectedMethod = this.methodButtonGroup.getSelection().getActionCommand();
         this.selectedClass = (String)this.charClass.getSelectedItem();
 
-        int[] stats = this.statGenerator.generate(this.selectedClass, this.selectedRace, this.selectedMethod);
+        int[] stats = this.statGenerator.generate(this.selectedClass, this.selectedRace, this.selectedMethod, this.sortScores.isSelected());
         String displayStats = formatStats(stats);
 
         try {

@@ -29,9 +29,6 @@ public class StatFrame extends org.mreposa.dmtools.view.StatFrame {
             }
         }
 
-        JLabel label1 = new JLabel("The first four rolling methods sort the resulting scores based on the selected class. The last two do not.");
-        this.notesPanel.add(label1);
-
         this.tabs.add("Character Facts and Traits", new CharacterDetailsGeneratorPanel((org.mreposa.dmtools.generator.adnd.DiceRollGenerator)this.rollGenerator));
         this.tabs.add("Thief Functions", new ThiefFunctionPanel());
         this.tabs.add("Treasure Generator", new TreasureGeneratorPanel((org.mreposa.dmtools.generator.adnd.DiceRollGenerator)this.rollGenerator));

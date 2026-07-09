@@ -15,7 +15,7 @@ public class StatGenerator implements org.mreposa.dmtools.generator.StatGenerato
     }
 
     @Override
-    public int[] generate(String selectedClass, String selectedRace, String selectedMethod) {
+    public int[] generate(String selectedClass, String selectedRace, String selectedMethod, boolean sortScores) {
         int[] stats = new int[PlayerCharacterClass.AVAILABLE_STATS.length];
 
         if (selectedClass != null && selectedRace != null && selectedMethod != null && !selectedMethod.isBlank()) {
@@ -119,36 +119,36 @@ public class StatGenerator implements org.mreposa.dmtools.generator.StatGenerato
                 stats[statSlot] = total;
             }
 
-            if (selectedMethod.equals(StatMethod.AVAILABLE_METHODS[3])) {
-                int[] prioritizedStats = assignStatsByPriority(selectedClass, stats);
-                System.arraycopy(prioritizedStats, 0, stats, 0, prioritizedStats.length);
-            }
-            else if (selectedMethod.equals(StatMethod.AVAILABLE_METHODS[0]) ||
-                     selectedMethod.equals(StatMethod.AVAILABLE_METHODS[1]) ||
-                     selectedMethod.equals(StatMethod.AVAILABLE_METHODS[2]))
-            {
-                int[] sortedStats = new int[PlayerCharacterClass.AVAILABLE_STATS.length];
-                sortedStats[0] = stats[0];
-                sortedStats[1] = stats[2];
-                sortedStats[2] = stats[3];
-                sortedStats[3] = stats[4];
-                sortedStats[4] = stats[5];
-                sortedStats[5] = stats[6];
-                sortedStats[6] = stats[7];
-                sortedStats[7] = 0;
+            if (sortScores) {
+                if (selectedMethod.equals(StatMethod.AVAILABLE_METHODS[3])) {
+                    int[] prioritizedStats = assignStatsByPriority(selectedClass, stats);
+                    System.arraycopy(prioritizedStats, 0, stats, 0, prioritizedStats.length);
+                }
+                else
+                {
+                    int[] sortedStats = new int[PlayerCharacterClass.AVAILABLE_STATS.length];
+                    sortedStats[0] = stats[0];
+                    sortedStats[1] = stats[2];
+                    sortedStats[2] = stats[3];
+                    sortedStats[3] = stats[4];
+                    sortedStats[4] = stats[5];
+                    sortedStats[5] = stats[6];
+                    sortedStats[6] = stats[7];
+                    sortedStats[7] = 0;
 
-                java.util.Arrays.sort(sortedStats);
+                    java.util.Arrays.sort(sortedStats);
 
-                stats[0] = sortedStats[7];
-                stats[2] = sortedStats[6];
-                stats[3] = sortedStats[5];
-                stats[4] = sortedStats[4];
-                stats[5] = sortedStats[3];
-                stats[6] = sortedStats[2];
-                stats[7] = sortedStats[1];
+                    stats[0] = sortedStats[7];
+                    stats[2] = sortedStats[6];
+                    stats[3] = sortedStats[5];
+                    stats[4] = sortedStats[4];
+                    stats[5] = sortedStats[3];
+                    stats[6] = sortedStats[2];
+                    stats[7] = sortedStats[1];
 
-                int[] prioritizedStats = assignStatsByPriority(selectedClass, stats);
-                System.arraycopy(prioritizedStats, 0, stats, 0, prioritizedStats.length);
+                    int[] prioritizedStats = assignStatsByPriority(selectedClass, stats);
+                    System.arraycopy(prioritizedStats, 0, stats, 0, prioritizedStats.length);
+                }
             }
 
             for (int statSlot = 0; statSlot < PlayerCharacterClass.AVAILABLE_STATS.length; statSlot++) {
