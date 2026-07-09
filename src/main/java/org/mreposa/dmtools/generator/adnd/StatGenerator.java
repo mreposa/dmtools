@@ -4,7 +4,6 @@ import org.mreposa.dmtools.model.adnd.playerclass.PlayerCharacterClass;
 import org.mreposa.dmtools.model.adnd.rollmethod.*;
 import org.mreposa.dmtools.model.adnd.race.PlayerCharacterRace;
 
-import java.util.Arrays;
 import java.util.Random;
 
 public class StatGenerator implements org.mreposa.dmtools.generator.StatGenerator {
@@ -31,6 +30,7 @@ public class StatGenerator implements org.mreposa.dmtools.generator.StatGenerato
             StatMethod method;
 
             int[] preGenRolls = new int[12];
+
             if (selectedMethod.equals(StatMethod.AVAILABLE_METHODS[3])) {
                 // Roll 3d6 twelve times, take best 6 scores
                 for (int r = 0; r < 12; r++) {
@@ -42,6 +42,48 @@ public class StatGenerator implements org.mreposa.dmtools.generator.StatGenerato
                 }
 
                 java.util.Arrays.sort(preGenRolls);
+            }
+
+            if (selectedMethod.equals(StatMethod.AVAILABLE_METHODS[5])) {
+                int[][] multiCharRolls = new int[8][12];
+                int[] columnTotals = new int[12];
+
+                // Roll 3d6 for 12 characters
+                for (int c = 0; c < 12; c++) {
+                    for (int r = 0; r < 8; r++) {
+                        for (int i = 0; i < 3; i++) {
+                            total = total + rand.nextInt(6) + 1;
+                        }
+                        multiCharRolls[r][c] = total;
+                        total = 0;
+                    }
+                }
+
+                // Add up each character's scores
+                for (int c = 0; c < 12; c++) {
+                    for (int r = 0; r < 8; r++) {
+                        if (r != 1) {
+                            total = total + multiCharRolls[r][c];
+                        }
+                    }
+                    columnTotals[c] = total;
+                    total = 0;
+                }
+
+                // Find the character with the highest score
+                int highestColumn = 0;
+                int highestValue = columnTotals[0];
+
+                for (int c = 1; c < 12; c++) {
+                    if (columnTotals[c] > highestValue) {
+                        highestValue = columnTotals[c];
+                        highestColumn = c;
+                    }
+                }
+
+                for (int r = 0; r < 8; r++) {
+                    preGenRolls[r] = multiCharRolls[r][highestColumn];
+                }
             }
 
             for (int statSlot = 0; statSlot < PlayerCharacterClass.AVAILABLE_STATS.length; statSlot++) {
@@ -62,6 +104,8 @@ public class StatGenerator implements org.mreposa.dmtools.generator.StatGenerato
                     } else if (selectedMethod.equals(StatMethod.AVAILABLE_METHODS[4])) {
                         method = new ThreeDSixSixTimes();
                         total = method.generate(this.rand);
+                    } else if (selectedMethod.equals(StatMethod.AVAILABLE_METHODS[5])) {
+                        total = preGenRolls[statSlot];
                     } else {
                         method = new ThreeDSix();
                         total = method.generate(this.rand);
