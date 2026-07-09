@@ -23,6 +23,7 @@ public abstract class StatFrame extends JFrame {
     private final JComboBox<String> charRace;
     private final JComboBox<String> charClass;
     protected JPanel methodPanel;
+    protected JPanel notesPanel;
     protected ButtonGroup methodButtonGroup;
     protected final JEditorPane display;
     protected StatGenerator statGenerator;
@@ -106,10 +107,14 @@ public abstract class StatFrame extends JFrame {
         this.methodPanel.add(label4);
         this.methodButtonGroup = new ButtonGroup();
 
+        this.notesPanel = new JPanel();
+        this.notesPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+
         topPanel = new JPanel();
-        topPanel.setLayout(new GridLayout(2, 1));
+        topPanel.setLayout(new GridLayout(3, 1));
         topPanel.add(classPanel);
         topPanel.add(this.methodPanel);
+        topPanel.add(this.notesPanel);
 
         this.display = new JEditorPane();
         this.display.setEditable(false);
