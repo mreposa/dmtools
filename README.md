@@ -5,7 +5,7 @@ The DM Tools project creates a Java Swing program containing various tools to ai
 DM Tools uses tables and data from the Advanced Dungeons and Dragons 1st edition Dungeon Masters Guide, Players Handbook, Unearthed Arcana, and Monster Manual.
 
 ## Building dmtools
-To build the project on your machine you will need to install Java, Git, and Maven.
+To build the project on your machine you will need to install the Java SE Development Kit, Git, and Maven.
 To generate an executable JAR file, clone this project and use the following commands:
 ```
 cd dmtools
