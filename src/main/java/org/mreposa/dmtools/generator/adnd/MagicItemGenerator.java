@@ -1,6 +1,8 @@
 package org.mreposa.dmtools.generator.adnd;
 
 import org.mreposa.dmtools.model.adnd.magic.*;
+import org.mreposa.dmtools.model.adnd.magic.unusual.UnusualWeapon;
+import org.mreposa.dmtools.model.adnd.magic.unusual.UnusualWeaponTable;
 import org.mreposa.dmtools.model.roll.Roll;
 
 import java.util.ArrayList;
@@ -205,5 +207,10 @@ public class MagicItemGenerator {
         }
 
         return magicItemList;
+    }
+
+    public UnusualWeapon generateUnusualWeapon() {
+        UnusualWeaponTable uwt = new UnusualWeaponTable(this.diceRollGenerator);
+        return uwt.generateUnusualWeapon();
     }
 }

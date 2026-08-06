@@ -4,7 +4,9 @@ import org.mreposa.dmtools.generator.adnd.DiceRollGenerator;
 import org.mreposa.dmtools.generator.adnd.MagicItemGenerator;
 import org.mreposa.dmtools.model.adnd.magic.MagicItem;
 import org.mreposa.dmtools.model.adnd.magic.MagicItemTable;
-import org.mreposa.dmtools.model.adnd.treasure.TreasureType;
+import org.mreposa.dmtools.model.adnd.magic.unusual.UnusualWeapon;
+import org.mreposa.dmtools.model.adnd.magic.unusual.extraordinary.ExtraordinaryPower;
+import org.mreposa.dmtools.model.adnd.magic.unusual.primary.PrimaryAbility;
 
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
@@ -12,6 +14,7 @@ import javax.swing.text.Document;
 import java.awt.*;
 import java.io.Serial;
 import java.util.List;
+import java.util.Set;
 
 public class MagicItemGeneratorPanel extends JPanel {
     @Serial
@@ -60,11 +63,19 @@ public class MagicItemGeneratorPanel extends JPanel {
         generateButton.addActionListener(_ -> displayRoll());
         selectionPanel.add(generateButton);
 
+        JButton generateUnusualButton = new JButton("Generate Unusual Weapon");
+        Dimension bd2 = new Dimension(210, 20);
+        generateUnusualButton.setSize(bd2);
+        generateUnusualButton.setPreferredSize(bd2);
+        generateUnusualButton.setMaximumSize(bd2);
+        generateUnusualButton.addActionListener(_ -> displayUnusualWeapon());
+        selectionPanel.add(generateUnusualButton);
+
         JButton clearButton = new JButton("Clear");
-        Dimension bd2 = new Dimension(90, 20);
-        clearButton.setSize(bd2);
-        clearButton.setPreferredSize(bd2);
-        clearButton.setMaximumSize(bd2);
+        Dimension bd3 = new Dimension(90, 20);
+        clearButton.setSize(bd3);
+        clearButton.setPreferredSize(bd3);
+        clearButton.setMaximumSize(bd3);
         clearButton.addActionListener(_ -> clearDisplay());
         selectionPanel.add(clearButton);
 
@@ -106,6 +117,91 @@ public class MagicItemGeneratorPanel extends JPanel {
         output.append("\n\n");
 
         return output.toString();
+    }
+
+    private void displayUnusualWeapon() {
+        UnusualWeapon weapon = this.magicItemGenerator.generateUnusualWeapon();
+        StringBuilder output = new StringBuilder();
+        int a = 0;
+
+        if (!weapon.isUnusual()) {
+            output.append("Weapon has no unusual properties\n");
+        }
+        else {
+            output.append("Intelligence: ");
+            output.append(weapon.getIntelligenceScore());
+            output.append("\n");
+            output.append("Communication: ");
+            output.append(weapon.getCommunication());
+            output.append("\n");
+            output.append("Alignment: ");
+            output.append(weapon.getAlignment());
+            output.append("\n");
+            output.append("Languages: ");
+            output.append(weapon.getLanguages());
+            output.append(" + alignment");
+            output.append("\n");
+
+            Set<PrimaryAbility> primaryAbilities = weapon.getPrimaryAbilities();
+            if (!primaryAbilities.isEmpty()) {
+                output.append("Primary Abilities: ");
+                for (PrimaryAbility ability : primaryAbilities) {
+                    output.append(ability.getText());
+                    output.append(" ");
+                    output.append(ability.getRange());
+                    output.append("' r");
+
+                    if (a < primaryAbilities.size() - 1) {
+                        output.append("; ");
+                    }
+
+                    a++;
+                }
+                output.append("\n");
+            }
+
+            Set<ExtraordinaryPower> extraordinaryPowers = weapon.getExtraordinaryPowers();
+            a = 0;
+            if (!extraordinaryPowers.isEmpty()) {
+                output.append("Extraordinary Powers: ");
+                for (ExtraordinaryPower power : extraordinaryPowers) {
+                    output.append(power.getText());
+                    output.append(" - ");
+                    output.append(power.getUses());
+                    output.append(power.getFrequency());
+
+                    if (!power.getDuration().isBlank()) {
+                        output.append(", ");
+                        output.append(power.getDuration());
+                    }
+
+                    if (a < extraordinaryPowers.size() - 1) {
+                        output.append("; ");
+                    }
+
+                    a++;
+                }
+                output.append("\n");
+            }
+
+            if (weapon.isSpecialPurpose()) {
+                output.append("Special Purpose: ");
+                output.append(weapon.getSpecialPurpose());
+                output.append(" (");
+                output.append(weapon.getSpecialPurposePower());
+                output.append(")");
+                output.append("\n");
+            }
+        }
+
+        output.append("\n");
+
+        try {
+            Document doc = this.display.getDocument();
+            doc.insertString(doc.getLength(), output.toString(), null);
+        } catch (BadLocationException ble) {
+            this.display.setText("ERROR: " + ble.getMessage());
+        }
     }
 
     private void clearDisplay() {
