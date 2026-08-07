@@ -2,6 +2,7 @@ package org.mreposa.dmtools.view.adnd;
 
 import org.mreposa.dmtools.generator.adnd.DiceRollGenerator;
 import org.mreposa.dmtools.generator.adnd.CharacterDetailsGenerator;
+import org.mreposa.dmtools.generator.adnd.LanguageGenerator;
 import org.mreposa.dmtools.model.adnd.details.CharacterDetails;
 import org.mreposa.dmtools.model.adnd.details.CharacterDetailsTable;
 
@@ -20,6 +21,7 @@ public class CharacterDetailsGeneratorPanel extends JPanel {
     private static final int PANEL_HEIGHT = 1000;
 
     private final CharacterDetailsGenerator characterDetailsGenerator;
+    private final LanguageGenerator languageGenerator;
     private final JComboBox<String> race;
     private final JComboBox<String> sex;
     private final JEditorPane display;
@@ -28,6 +30,7 @@ public class CharacterDetailsGeneratorPanel extends JPanel {
         super();
 
         this.characterDetailsGenerator = new CharacterDetailsGenerator(rollGenerator);
+        this.languageGenerator = new LanguageGenerator(rollGenerator);
 
         setLayout(new BorderLayout());
         Dimension d = new Dimension(PANEL_WIDTH, PANEL_HEIGHT);
@@ -60,11 +63,19 @@ public class CharacterDetailsGeneratorPanel extends JPanel {
         generateButton.addActionListener(_ -> displayRoll());
         selectionPanel.add(generateButton);
 
+        JButton languageButton = new JButton("Generate Language");
+        Dimension bd2 = new Dimension(160, 20);
+        languageButton.setSize(bd2);
+        languageButton.setPreferredSize(bd2);
+        languageButton.setMaximumSize(bd2);
+        languageButton.addActionListener(_ -> displayLanguage());
+        selectionPanel.add(languageButton);
+
         JButton clearButton = new JButton("Clear");
-        Dimension bd2 = new Dimension(90, 20);
-        clearButton.setSize(bd2);
-        clearButton.setPreferredSize(bd2);
-        clearButton.setMaximumSize(bd2);
+        Dimension bd3 = new Dimension(90, 20);
+        clearButton.setSize(bd3);
+        clearButton.setPreferredSize(bd3);
+        clearButton.setMaximumSize(bd3);
         clearButton.addActionListener(_ -> clearDisplay());
         selectionPanel.add(clearButton);
 
@@ -82,6 +93,17 @@ public class CharacterDetailsGeneratorPanel extends JPanel {
         CharacterDetails characterDetails = this.characterDetailsGenerator.generate(selectedRace, selectedSex);
 
         String output = getOutput(characterDetails);
+
+        try {
+            Document doc = this.display.getDocument();
+            doc.insertString(doc.getLength(), output, null);
+        } catch (BadLocationException ble) {
+            this.display.setText("ERROR: " + ble.getMessage());
+        }
+    }
+
+    private void displayLanguage() {
+        String output = this.languageGenerator.generate() + "\n";
 
         try {
             Document doc = this.display.getDocument();
