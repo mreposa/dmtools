@@ -7,10 +7,10 @@ import org.mreposa.dmtools.model.roll.Roll;
 
 import java.util.Set;
 
-public class UnusualWeaponTable {
+public class UnusualWeapons {
     private final DiceRollGenerator diceRollGenerator;
 
-    public UnusualWeaponTable(DiceRollGenerator diceRollGenerator) {
+    public UnusualWeapons(DiceRollGenerator diceRollGenerator) {
         this.diceRollGenerator = diceRollGenerator;
     }
 
@@ -256,24 +256,24 @@ public class UnusualWeaponTable {
         ExtraordinaryPower extraordinaryPower;
 
         for  (int i = 0; i < extraordinaryPowerCount; i++) {
-            extraordinaryPower = getExtraordinaryPower(false);
+            extraordinaryPower = getExtraordinaryPower(false, false);
 
             if (extraordinaryPower instanceof ChoosePower) {
                 // Roll a new power instead of choosing one
-                extraordinaryPower = getExtraordinaryPower(true);
+                extraordinaryPower = getExtraordinaryPower(true, false);
                 extraordinaryAddIncrement(extraordinaryPower, extraordinaryPowerList);
             }
             else if (extraordinaryPower instanceof ChooseSpecial) {
                 // Roll a new power instead of choosing one
-                extraordinaryPower = getExtraordinaryPower(true);
+                extraordinaryPower = getExtraordinaryPower(true, false);
                 extraordinaryAddIncrement(extraordinaryPower, extraordinaryPowerList);
                 extraordinaryPowers.setSpecialPurpose(true);
             }
             else if (extraordinaryPower instanceof RollTwiceEx) {
-                extraordinaryPower = getExtraordinaryPower(true);
+                extraordinaryPower = getExtraordinaryPower(false, true);
                 extraordinaryAddIncrement(extraordinaryPower, extraordinaryPowerList);
 
-                extraordinaryPower = getExtraordinaryPower(true);
+                extraordinaryPower = getExtraordinaryPower(false, true);
                 extraordinaryAddIncrement(extraordinaryPower, extraordinaryPowerList);
             }
             else {
@@ -307,7 +307,7 @@ public class UnusualWeaponTable {
         }
     }
 
-    private ExtraordinaryPower getExtraordinaryPower(boolean ignore) {
+    private ExtraordinaryPower getExtraordinaryPower(boolean ignoreChoose, boolean ignoreTwice) {
         ExtraordinaryPower extraordinaryPower = null;
 
         while (extraordinaryPower == null) {
@@ -343,15 +343,15 @@ public class UnusualWeaponTable {
             } else if (value < 95) {
                 extraordinaryPower = new XrayVision();
             } else if (value < 98) {
-                if (!ignore) {
+                if (!ignoreChoose && !ignoreTwice) {
                     extraordinaryPower = new RollTwiceEx();
                 }
             } else if (value < 99) {
-                if (!ignore) {
+                if (!ignoreChoose) {
                     extraordinaryPower = new ChoosePower();
                 }
             } else {
-                if (!ignore) {
+                if (!ignoreChoose) {
                     extraordinaryPower = new ChooseSpecial();
                 }
             }
