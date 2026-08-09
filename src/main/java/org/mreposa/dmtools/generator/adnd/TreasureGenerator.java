@@ -7,13 +7,10 @@ import org.mreposa.dmtools.model.adnd.treasure.TreasureType;
 import org.mreposa.dmtools.model.roll.Roll;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class TreasureGenerator {
     private final DiceRollGenerator diceRollGenerator;
-
-    private final ArrayList<String> coinTypes = new ArrayList<>(Arrays.asList("cp", "sp", "ep", "gp", "pp"));
 
     public TreasureGenerator() {
         this.diceRollGenerator = new DiceRollGenerator();
@@ -53,37 +50,6 @@ public class TreasureGenerator {
                 genTreasure.setType(treasure.getType());
 
                 treasureList.add(genTreasure);
-            }
-        }
-
-        return treasureList;
-    }
-
-    public List<GeneratedTreasure> generatePouch(int maxCoins) {
-        ArrayList<GeneratedTreasure> treasureList = new ArrayList<>();
-        GeneratedTreasure genTreasure;
-        Roll roll;
-        int amount;
-
-        for (String coinType : this.coinTypes) {
-            if (maxCoins > 0) {
-                roll = this.diceRollGenerator.roll(1, maxCoins);
-                amount = roll.getTotal();
-
-                if (amount > maxCoins) {
-                    amount = maxCoins;
-                }
-
-                genTreasure = new GeneratedTreasure();
-                genTreasure.setAmount(amount);
-                genTreasure.setType(coinType);
-
-                treasureList.add(genTreasure);
-
-                maxCoins = maxCoins - amount;
-            }
-            else {
-                break;
             }
         }
 

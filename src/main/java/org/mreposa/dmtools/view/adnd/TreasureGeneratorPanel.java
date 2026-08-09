@@ -57,22 +57,6 @@ public class TreasureGeneratorPanel extends JPanel {
         clearButton.addActionListener(_ -> clearDisplay());
         selectionPanel.add(clearButton);
 
-        JButton generateLargePouchButton = new JButton("Large Pouch");
-        bd = new Dimension(120, 20);
-        generateLargePouchButton.setSize(bd);
-        generateLargePouchButton.setPreferredSize(bd);
-        generateLargePouchButton.setMaximumSize(bd);
-        generateLargePouchButton.addActionListener(_ -> getPouch(50));
-        selectionPanel.add(generateLargePouchButton);
-
-        JButton generateSmallPouchButton = new JButton("Small Pouch");
-        bd = new Dimension(120, 20);
-        generateSmallPouchButton.setSize(bd);
-        generateSmallPouchButton.setPreferredSize(bd);
-        generateSmallPouchButton.setMaximumSize(bd);
-        generateSmallPouchButton.addActionListener(_ -> getPouch(25));
-        selectionPanel.add(generateSmallPouchButton);
-
         this.display = new JEditorPane();
         this.display.setEditable(false);
 
@@ -83,19 +67,6 @@ public class TreasureGeneratorPanel extends JPanel {
     private void getTreasure() {
         String selectedTreasureType = (String)this.treasureType.getSelectedItem();
         java.util.List<GeneratedTreasure> list = this.treasureGenerator.generate(selectedTreasureType);
-
-        String displayTreasure = displayTreasure(list);
-
-        try {
-            Document doc = this.display.getDocument();
-            doc.insertString(doc.getLength(), displayTreasure, null);
-        } catch (BadLocationException ble) {
-            this.display.setText("ERROR: " + ble.getMessage());
-        }
-    }
-
-    private void getPouch(int maxCoins) {
-        java.util.List<GeneratedTreasure> list = this.treasureGenerator.generatePouch(maxCoins);
 
         String displayTreasure = displayTreasure(list);
 
