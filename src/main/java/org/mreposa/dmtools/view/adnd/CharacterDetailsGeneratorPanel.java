@@ -103,7 +103,7 @@ public class CharacterDetailsGeneratorPanel extends JPanel {
     }
 
     private void displayLanguage() {
-        String output = this.languageGenerator.generate() + "\n";
+        String output = this.languageGenerator.generate() + "\n\n";
 
         try {
             Document doc = this.display.getDocument();
