@@ -44,6 +44,8 @@ public class StatFrame extends org.mreposa.dmtools.view.StatFrame {
 
         if (stats != null) {
             output.append(this.selectedRace);
+            output.append(" ");
+            output.append(this.selectedClass);
             output.append("\n");
             output.append(PlayerCharacterClass.AVAILABLE_STATS[PlayerCharacterClass.STAT_STR]);
             output.append(" ");
