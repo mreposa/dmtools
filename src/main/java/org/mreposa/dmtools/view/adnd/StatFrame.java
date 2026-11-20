@@ -34,8 +34,9 @@ public class StatFrame extends org.mreposa.dmtools.view.StatFrame {
         this.tabs.add("Treasure Generator", new TreasureGeneratorPanel((org.mreposa.dmtools.generator.adnd.DiceRollGenerator)this.rollGenerator));
         this.tabs.add("Gem Generator", new GemGeneratorPanel((org.mreposa.dmtools.generator.adnd.DiceRollGenerator)this.rollGenerator));
         this.tabs.add("Jewelry Generator", new JewelryGeneratorPanel((org.mreposa.dmtools.generator.adnd.DiceRollGenerator)this.rollGenerator));
-        this.tabs.add("Magic Item Generator", new MagicItemGeneratorPanel((org.mreposa.dmtools.generator.adnd.DiceRollGenerator)this.rollGenerator));
         this.tabs.add("Pouch Generator", new PouchGeneratorPanel((org.mreposa.dmtools.generator.adnd.DiceRollGenerator)this.rollGenerator));
+        this.tabs.add("Magic Item Generator", new MagicItemGeneratorPanel((org.mreposa.dmtools.generator.adnd.DiceRollGenerator)this.rollGenerator));
+        this.tabs.add("Spell Generator", new SpellGeneratorPanel((org.mreposa.dmtools.generator.adnd.DiceRollGenerator)this.rollGenerator));
     }
 
     @Override

@@ -16,8 +16,10 @@ public class ScrollB extends MagicItemTable {
         String itemName = "scroll of ";
         String type = "";
         int typeRoll = 0;
+        int levelRoll = 0;
+        int spellCount = 0;
+        StringBuilder spellLevels = new StringBuilder();
         String casterClass = "";
-        String spellLevel = "";
 
         dieRoll = this.diceRollGenerator.roll(1, 100);
         int classRoll = dieRoll.getTotal();
@@ -45,115 +47,299 @@ public class ScrollB extends MagicItemTable {
         }
 
         if (roll < 11) {
-            itemName = itemName + "1 " + casterClass + " spell (level 1 - 4)";
+            dieRoll = this.diceRollGenerator.roll(1, 4);
+            levelRoll = dieRoll.getTotal();
+            itemName = itemName + "1 " + casterClass + " spell (level " + levelRoll + ")";
         }
         else if (roll < 17) {
-            itemName = itemName + "1 " + casterClass + " spell (level 1 - 6)";
+            dieRoll = this.diceRollGenerator.roll(1, 6);
+            levelRoll = dieRoll.getTotal();
+            itemName = itemName + "1 " + casterClass + " spell (level " + levelRoll + ")";
         }
         else if (roll < 20) {
             if (classRoll < 71) {
-                spellLevel = "2 - 9";
+                dieRoll = this.diceRollGenerator.roll(1, 8);
+                levelRoll = dieRoll.getTotal() + 1;
             }
             else {
-                spellLevel = "2 - 7";
+                dieRoll = this.diceRollGenerator.roll(1, 6);
+                levelRoll = dieRoll.getTotal() + 1;
             }
 
-            itemName = itemName + "1 " + casterClass + " spell (level " + spellLevel + ")";
+            itemName = itemName + "1 " + casterClass + " spell (level " + levelRoll + ")";
         }
         else if (roll < 25) {
-            itemName = itemName + "2 " + casterClass + " spells (level 1 - 4)";
+            while (spellCount < 2) {
+                dieRoll = this.diceRollGenerator.roll(1, 4);
+                levelRoll = dieRoll.getTotal();
+                spellLevels.append(levelRoll);
+                if (spellCount < 1) {
+                    spellLevels.append(", ");
+                }
+                spellCount++;
+            }
+
+            itemName = itemName + "2 " + casterClass + " spells (level " + spellLevels + ")";
         }
         else if (roll < 28) {
             if (classRoll < 71) {
-                spellLevel = "1 - 8";
+                while (spellCount < 2) {
+                    dieRoll = this.diceRollGenerator.roll(1, 8);
+                    levelRoll = dieRoll.getTotal();
+                    spellLevels.append(levelRoll);
+                    if (spellCount < 1) {
+                        spellLevels.append(", ");
+                    }
+                    spellCount++;
+                }
             }
             else {
-                spellLevel = "1 - 6";
+                while (spellCount < 2) {
+                    dieRoll = this.diceRollGenerator.roll(1, 6);
+                    levelRoll = dieRoll.getTotal();
+                    spellLevels.append(levelRoll);
+                    if (spellCount < 1) {
+                        spellLevels.append(", ");
+                    }
+                    spellCount++;
+                }
             }
 
-            itemName = itemName + "2 " + casterClass + " spells (level " + spellLevel + ")";
+            itemName = itemName + "2 " + casterClass + " spells (level " + spellLevels + ")";
         }
         else if (roll < 33) {
-            itemName = itemName + "3 " + casterClass + " spells (level 1 - 4)";
+            while (spellCount < 3) {
+                dieRoll = this.diceRollGenerator.roll(1, 4);
+                levelRoll = dieRoll.getTotal();
+                spellLevels.append(levelRoll);
+                if (spellCount < 2) {
+                    spellLevels.append(", ");
+                }
+                spellCount++;
+            }
+
+            itemName = itemName + "3 " + casterClass + " spells (level " + spellLevels + ")";
         }
         else if (roll < 36) {
             if (classRoll < 71) {
-                spellLevel = "2 - 9";
+                while (spellCount < 3) {
+                    dieRoll = this.diceRollGenerator.roll(1, 8);
+                    levelRoll = dieRoll.getTotal() + 1;
+                    spellLevels.append(levelRoll);
+                    if (spellCount < 2) {
+                        spellLevels.append(", ");
+                    }
+                    spellCount++;
+                }
             }
             else {
-                spellLevel = "2 - 7";
+                while (spellCount < 3) {
+                    dieRoll = this.diceRollGenerator.roll(1, 6);
+                    levelRoll = dieRoll.getTotal() + 1;
+                    spellLevels.append(levelRoll);
+                    if (spellCount < 2) {
+                        spellLevels.append(", ");
+                    }
+                    spellCount++;
+                }
             }
 
-            itemName = itemName + "3 " + casterClass + " spells (level " + spellLevel + ")";
+            itemName = itemName + "3 " + casterClass + " spells (level " + spellLevels + ")";
         }
         else if (roll < 40) {
-            itemName = itemName + "4 " + casterClass + " spells (level 1 - 6)";
+            while (spellCount < 4) {
+                dieRoll = this.diceRollGenerator.roll(1, 6);
+                levelRoll = dieRoll.getTotal() + 1;
+                spellLevels.append(levelRoll);
+                if (spellCount < 3) {
+                    spellLevels.append(", ");
+                }
+                spellCount++;
+            }
+
+            itemName = itemName + "4 " + casterClass + " spells (level "  + spellLevels + ")";
         }
         else if (roll < 43) {
             if (classRoll < 71) {
-                spellLevel = "1 - 8";
+                while (spellCount < 4) {
+                    dieRoll = this.diceRollGenerator.roll(1, 8);
+                    levelRoll = dieRoll.getTotal();
+                    spellLevels.append(levelRoll);
+                    if (spellCount < 3) {
+                        spellLevels.append(", ");
+                    }
+                    spellCount++;
+                }
             }
             else {
-                spellLevel = "1 - 6";
+                while (spellCount < 4) {
+                    dieRoll = this.diceRollGenerator.roll(1, 6);
+                    levelRoll = dieRoll.getTotal();
+                    spellLevels.append(levelRoll);
+                    if (spellCount < 3) {
+                        spellLevels.append(", ");
+                    }
+                    spellCount++;
+                }
             }
 
-            itemName = itemName + "4 " + casterClass + " spells (level " + spellLevel + ")";
+            itemName = itemName + "4 " + casterClass + " spells (level " + spellLevels + ")";
         }
         else if (roll < 47) {
-            itemName = itemName + "5 " + casterClass + " spells (level 1 - 6)";
+            while (spellCount < 5) {
+                dieRoll = this.diceRollGenerator.roll(1, 6);
+                levelRoll = dieRoll.getTotal();
+                spellLevels.append(levelRoll);
+                if (spellCount < 4) {
+                    spellLevels.append(", ");
+                }
+                spellCount++;
+            }
+
+            itemName = itemName + "5 " + casterClass + " spells (level "  + spellLevels + ")";
         }
         else if (roll < 50) {
             if (classRoll < 71) {
-                spellLevel = "1 - 8";
+                while (spellCount < 5) {
+                    dieRoll = this.diceRollGenerator.roll(1, 8);
+                    levelRoll = dieRoll.getTotal();
+                    spellLevels.append(levelRoll);
+                    if (spellCount < 4) {
+                        spellLevels.append(", ");
+                    }
+                    spellCount++;
+                }
             }
             else {
-                spellLevel = "1 - 6";
+                while (spellCount < 5) {
+                    dieRoll = this.diceRollGenerator.roll(1, 6);
+                    levelRoll = dieRoll.getTotal();
+                    spellLevels.append(levelRoll);
+                    if (spellCount < 4) {
+                        spellLevels.append(", ");
+                    }
+                    spellCount++;
+                }
             }
 
-            itemName = itemName + "5 " + casterClass + " spells (level " + spellLevel + ")";
+            itemName = itemName + "5 " + casterClass + " spells (level " + spellLevels + ")";
         }
         else if (roll < 53) {
-            itemName = itemName + "6 " + casterClass + " spells (level 1 - 6)";
+            while (spellCount < 6) {
+                dieRoll = this.diceRollGenerator.roll(1, 6);
+                levelRoll = dieRoll.getTotal();
+                spellLevels.append(levelRoll);
+                if (spellCount < 5) {
+                    spellLevels.append(", ");
+                }
+                spellCount++;
+            }
+
+            itemName = itemName + "6 " + casterClass + " spells (level " + spellLevels + ")";
         }
         else if (roll < 55) {
             if (classRoll < 71) {
-                spellLevel = "3 - 8";
+                while (spellCount < 6) {
+                    dieRoll = this.diceRollGenerator.roll(1, 6);
+                    levelRoll = dieRoll.getTotal() + 2;
+                    spellLevels.append(levelRoll);
+                    if (spellCount < 5) {
+                        spellLevels.append(", ");
+                    }
+                    spellCount++;
+                }
             }
             else {
-                spellLevel = "3 - 6";
+                while (spellCount < 6) {
+                    dieRoll = this.diceRollGenerator.roll(1, 4);
+                    levelRoll = dieRoll.getTotal() + 2;
+                    spellLevels.append(levelRoll);
+                    if (spellCount < 5) {
+                        spellLevels.append(", ");
+                    }
+                    spellCount++;
+                }
             }
 
-            itemName = itemName + "6 " + casterClass + " spells (level " + spellLevel + ")";
+            itemName = itemName + "6 " + casterClass + " spells (level " + spellLevels + ")";
         }
         else if (roll < 58) {
             if (classRoll < 71) {
-                spellLevel = "1 - 8";
+                while (spellCount < 7) {
+                    dieRoll = this.diceRollGenerator.roll(1, 8);
+                    levelRoll = dieRoll.getTotal();
+                    spellLevels.append(levelRoll);
+                    if (spellCount < 6) {
+                        spellLevels.append(", ");
+                    }
+                    spellCount++;
+                }
             }
             else {
-                spellLevel = "1 - 7";
+                while (spellCount < 7) {
+                    dieRoll = this.diceRollGenerator.roll(1, 6);
+                    levelRoll = dieRoll.getTotal();
+                    spellLevels.append(levelRoll);
+                    if (spellCount < 6) {
+                        spellLevels.append(", ");
+                    }
+                    spellCount++;
+                }
             }
 
-            itemName = itemName + "7 " + casterClass + " spells (level " + spellLevel + ")";
+            itemName = itemName + "7 " + casterClass + " spells (level " + spellLevels + ")";
         }
         else if (roll < 60) {
             if (classRoll < 71) {
-                spellLevel = "2 - 9";
+                while (spellCount < 7) {
+                    dieRoll = this.diceRollGenerator.roll(1, 8);
+                    levelRoll = dieRoll.getTotal() + 1;
+                    spellLevels.append(levelRoll);
+                    if (spellCount < 6) {
+                        spellLevels.append(", ");
+                    }
+                    spellCount++;
+                }
             }
             else {
-                spellLevel = "2 - 7";
+                while (spellCount < 7) {
+                    dieRoll = this.diceRollGenerator.roll(1, 6);
+                    levelRoll = dieRoll.getTotal() + 1;
+                    spellLevels.append(levelRoll);
+                    if (spellCount < 6) {
+                        spellLevels.append(", ");
+                    }
+                    spellCount++;
+                }
             }
 
-            itemName = itemName + "7 " + casterClass + " spells (level " + spellLevel + ")";
+            itemName = itemName + "7 " + casterClass + " spells (level " + spellLevels + ")";
         }
         else if (roll == 60) {
             if (classRoll < 71) {
-                spellLevel = "4 - 9";
+                while (spellCount < 7) {
+                    dieRoll = this.diceRollGenerator.roll(1, 6);
+                    levelRoll = dieRoll.getTotal() + 3;
+                    spellLevels.append(levelRoll);
+                    if (spellCount < 6) {
+                        spellLevels.append(", ");
+                    }
+                    spellCount++;
+                }
             }
             else {
-                spellLevel = "4 - 7";
+                while (spellCount < 7) {
+                    dieRoll = this.diceRollGenerator.roll(1, 4);
+                    levelRoll = dieRoll.getTotal() + 3;
+                    spellLevels.append(levelRoll);
+                    if (spellCount < 6) {
+                        spellLevels.append(", ");
+                    }
+                    spellCount++;
+                }
             }
 
-            itemName = itemName + "7 " + casterClass + " spells (level " + spellLevel + ")";
+            itemName = itemName + "7 " + casterClass + " spells (level " + spellLevels + ")";
         }
         else if (roll < 63) {
             itemName = itemName + "protection - demons";

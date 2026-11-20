@@ -58,10 +58,13 @@ limitations under the License.
 ### Jewelry Generator Tab
 * Randomize jewelry
 
+### Pouch Generator Tab
+* Generate random amounts of coins for large and small pouches
+* Includes 100 random items that might be found in a pouch
+
 ### Magic Items Generator Tab
 * Randomize magic items of any type
 * Randomize intelligent weapons
 
-### Pouch Generator Tab
-* Generate random amounts of coins for large and small pouches
-* Includes 100 random items that might be found in a pouch
+### Spell Generator Tab
+* Generate random Cleric, Druid, Illusionist, and Magic-User spells
