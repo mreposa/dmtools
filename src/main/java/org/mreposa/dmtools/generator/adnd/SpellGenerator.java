@@ -66,55 +66,55 @@ public class SpellGenerator {
         if (casterClass.equals(SpellTable.SPELL_CLASSES[0])) {
             // Magic-User
             if (level == 1) {
-                dieRoll = this.diceRollGenerator.roll(1, 40);
+                dieRoll = this.diceRollGenerator.roll(1, SpellTable.MAGIC_USER_LEVEL_1.length);
                 value = dieRoll.getTotal() - 1;
 
                 spell = SpellTable.MAGIC_USER_LEVEL_1[value];
             }
             else if (level == 2) {
-                dieRoll = this.diceRollGenerator.roll(1, 36);
+                dieRoll = this.diceRollGenerator.roll(1, SpellTable.MAGIC_USER_LEVEL_2.length);
                 value = dieRoll.getTotal() - 1;
 
                 spell = SpellTable.MAGIC_USER_LEVEL_2[value];
             }
             else if (level == 3) {
-                dieRoll = this.diceRollGenerator.roll(1, 32);
+                dieRoll = this.diceRollGenerator.roll(1, SpellTable.MAGIC_USER_LEVEL_3.length);
                 value = dieRoll.getTotal() - 1;
 
                 spell = SpellTable.MAGIC_USER_LEVEL_3[value];
             }
             else if (level == 4) {
-                dieRoll = this.diceRollGenerator.roll(1, 32);
+                dieRoll = this.diceRollGenerator.roll(1, SpellTable.MAGIC_USER_LEVEL_4.length);
                 value = dieRoll.getTotal() - 1;
 
                 spell = SpellTable.MAGIC_USER_LEVEL_4[value];
             }
             else if (level == 5) {
-                dieRoll = this.diceRollGenerator.roll(1, 30);
+                dieRoll = this.diceRollGenerator.roll(1, SpellTable.MAGIC_USER_LEVEL_5.length);
                 value = dieRoll.getTotal() - 1;
 
                 spell = SpellTable.MAGIC_USER_LEVEL_5[value];
             }
             else if (level == 6) {
-                dieRoll = this.diceRollGenerator.roll(1, 30);
+                dieRoll = this.diceRollGenerator.roll(1, SpellTable.MAGIC_USER_LEVEL_6.length);
                 value = dieRoll.getTotal() - 1;
 
                 spell = SpellTable.MAGIC_USER_LEVEL_6[value];
             }
             else if (level == 7) {
-                dieRoll = this.diceRollGenerator.roll(1, 24);
+                dieRoll = this.diceRollGenerator.roll(1, SpellTable.MAGIC_USER_LEVEL_7.length);
                 value = dieRoll.getTotal() - 1;
 
                 spell = SpellTable.MAGIC_USER_LEVEL_7[value];
             }
             else if (level == 8) {
-                dieRoll = this.diceRollGenerator.roll(1, 20);
+                dieRoll = this.diceRollGenerator.roll(1, SpellTable.MAGIC_USER_LEVEL_8.length);
                 value = dieRoll.getTotal() - 1;
 
                 spell = SpellTable.MAGIC_USER_LEVEL_8[value];
             }
             else {
-                dieRoll = this.diceRollGenerator.roll(1, 16);
+                dieRoll = this.diceRollGenerator.roll(1, SpellTable.MAGIC_USER_LEVEL_9.length);
                 value = dieRoll.getTotal() - 1;
 
                 spell = SpellTable.MAGIC_USER_LEVEL_9[value];
@@ -123,43 +123,43 @@ public class SpellGenerator {
         else if (casterClass.equals(SpellTable.SPELL_CLASSES[1])) {
             // Cleric
             if (level == 1) {
-                dieRoll = this.diceRollGenerator.roll(1, 20);
+                dieRoll = this.diceRollGenerator.roll(1, SpellTable.CLERIC_LEVEL_1.length);
                 value = dieRoll.getTotal() - 1;
 
                 spell = SpellTable.CLERIC_LEVEL_1[value];
             }
             else if (level == 2) {
-                dieRoll = this.diceRollGenerator.roll(1, 20);
+                dieRoll = this.diceRollGenerator.roll(1, SpellTable.CLERIC_LEVEL_2.length);
                 value = dieRoll.getTotal() - 1;
 
                 spell = SpellTable.CLERIC_LEVEL_2[value];
             }
             else if (level == 3) {
-                dieRoll = this.diceRollGenerator.roll(1, 20);
+                dieRoll = this.diceRollGenerator.roll(1, SpellTable.CLERIC_LEVEL_3.length);
                 value = dieRoll.getTotal() - 1;
 
                 spell = SpellTable.CLERIC_LEVEL_3[value];
             }
             else if (level == 4) {
-                dieRoll = this.diceRollGenerator.roll(1, 16);
+                dieRoll = this.diceRollGenerator.roll(1, SpellTable.CLERIC_LEVEL_4.length);
                 value = dieRoll.getTotal() - 1;
 
                 spell = SpellTable.CLERIC_LEVEL_4[value];
             }
             else if (level == 5) {
-                dieRoll = this.diceRollGenerator.roll(1, 16);
+                dieRoll = this.diceRollGenerator.roll(1, SpellTable.CLERIC_LEVEL_5.length);
                 value = dieRoll.getTotal() - 1;
 
                 spell = SpellTable.CLERIC_LEVEL_5[value];
             }
             else if (level == 6) {
-                dieRoll = this.diceRollGenerator.roll(1, 12);
+                dieRoll = this.diceRollGenerator.roll(1, SpellTable.CLERIC_LEVEL_6.length);
                 value = dieRoll.getTotal() - 1;
 
                 spell = SpellTable.CLERIC_LEVEL_6[value];
             }
             else {
-                dieRoll = this.diceRollGenerator.roll(1, 12);
+                dieRoll = this.diceRollGenerator.roll(1, SpellTable.CLERIC_LEVEL_7.length);
                 value = dieRoll.getTotal() - 1;
 
                 spell = SpellTable.CLERIC_LEVEL_7[value];
@@ -168,43 +168,43 @@ public class SpellGenerator {
         else if (casterClass.equals(SpellTable.SPELL_CLASSES[2])) {
             // Druid
             if (level == 1) {
-                dieRoll = this.diceRollGenerator.roll(1, 16);
+                dieRoll = this.diceRollGenerator.roll(1, SpellTable.DRUID_LEVEL_1.length);
                 value = dieRoll.getTotal() - 1;
 
                 spell = SpellTable.DRUID_LEVEL_1[value];
             }
             else if (level == 2) {
-                dieRoll = this.diceRollGenerator.roll(1, 16);
+                dieRoll = this.diceRollGenerator.roll(1, SpellTable.DRUID_LEVEL_2.length);
                 value = dieRoll.getTotal() - 1;
 
                 spell = SpellTable.DRUID_LEVEL_2[value];
             }
             else if (level == 3) {
-                dieRoll = this.diceRollGenerator.roll(1, 16);
+                dieRoll = this.diceRollGenerator.roll(1, SpellTable.DRUID_LEVEL_3.length);
                 value = dieRoll.getTotal() - 1;
 
                 spell = SpellTable.DRUID_LEVEL_3[value];
             }
             else if (level == 4) {
-                dieRoll = this.diceRollGenerator.roll(1, 12);
+                dieRoll = this.diceRollGenerator.roll(1, SpellTable.DRUID_LEVEL_4.length);
                 value = dieRoll.getTotal() - 1;
 
                 spell = SpellTable.DRUID_LEVEL_4[value];
             }
             else if (level == 5) {
-                dieRoll = this.diceRollGenerator.roll(1, 12);
+                dieRoll = this.diceRollGenerator.roll(1, SpellTable.DRUID_LEVEL_5.length);
                 value = dieRoll.getTotal() - 1;
 
                 spell = SpellTable.DRUID_LEVEL_5[value];
             }
             else if (level == 6) {
-                dieRoll = this.diceRollGenerator.roll(1, 12);
+                dieRoll = this.diceRollGenerator.roll(1, SpellTable.DRUID_LEVEL_6.length);
                 value = dieRoll.getTotal() - 1;
 
                 spell = SpellTable.DRUID_LEVEL_6[value];
             }
             else {
-                dieRoll = this.diceRollGenerator.roll(1, 12);
+                dieRoll = this.diceRollGenerator.roll(1, SpellTable.DRUID_LEVEL_7.length);
                 value = dieRoll.getTotal() - 1;
 
                 spell = SpellTable.DRUID_LEVEL_7[value];
@@ -213,43 +213,43 @@ public class SpellGenerator {
         else {
             // Illusionist
             if (level == 1) {
-                dieRoll = this.diceRollGenerator.roll(1, 16);
+                dieRoll = this.diceRollGenerator.roll(1, SpellTable.ILLUSIONIST_LEVEL_1.length);
                 value = dieRoll.getTotal() - 1;
 
                 spell = SpellTable.ILLUSIONIST_LEVEL_1[value];
             }
             else if (level == 2) {
-                dieRoll = this.diceRollGenerator.roll(1, 16);
+                dieRoll = this.diceRollGenerator.roll(1, SpellTable.ILLUSIONIST_LEVEL_2.length);
                 value = dieRoll.getTotal() - 1;
 
                 spell = SpellTable.ILLUSIONIST_LEVEL_2[value];
             }
             else if (level == 3) {
-                dieRoll = this.diceRollGenerator.roll(1, 16);
+                dieRoll = this.diceRollGenerator.roll(1, SpellTable.ILLUSIONIST_LEVEL_3.length);
                 value = dieRoll.getTotal() - 1;
 
                 spell = SpellTable.ILLUSIONIST_LEVEL_3[value];
             }
             else if (level == 4) {
-                dieRoll = this.diceRollGenerator.roll(1, 12);
+                dieRoll = this.diceRollGenerator.roll(1, SpellTable.ILLUSIONIST_LEVEL_4.length);
                 value = dieRoll.getTotal() - 1;
 
                 spell = SpellTable.ILLUSIONIST_LEVEL_4[value];
             }
             else if (level == 5) {
-                dieRoll = this.diceRollGenerator.roll(1, 12);
+                dieRoll = this.diceRollGenerator.roll(1, SpellTable.ILLUSIONIST_LEVEL_5.length);
                 value = dieRoll.getTotal() - 1;
 
                 spell = SpellTable.ILLUSIONIST_LEVEL_5[value];
             }
             else if (level == 6) {
-                dieRoll = this.diceRollGenerator.roll(1, 12);
+                dieRoll = this.diceRollGenerator.roll(1, SpellTable.ILLUSIONIST_LEVEL_6.length);
                 value = dieRoll.getTotal() - 1;
 
                 spell = SpellTable.ILLUSIONIST_LEVEL_6[value];
             }
             else {
-                dieRoll = this.diceRollGenerator.roll(1, 8);
+                dieRoll = this.diceRollGenerator.roll(1, SpellTable.ILLUSIONIST_LEVEL_7.length);
                 value = dieRoll.getTotal() - 1;
 
                 spell = SpellTable.ILLUSIONIST_LEVEL_7[value];
@@ -261,13 +261,13 @@ public class SpellGenerator {
                     String flSpell;
 
                     while (count < 4) {
-                        dieRoll = this.diceRollGenerator.roll(1, 20);
+                        dieRoll = this.diceRollGenerator.roll(1, SpellTable.ILLUSIONIST_MU_LEVEL_1.length);
                         value = dieRoll.getTotal() - 1;
 
                         flSpell = SpellTable.ILLUSIONIST_MU_LEVEL_1[value];
 
                         while (firstLevelIllusionistSpellList.contains(flSpell)) {
-                            dieRoll = this.diceRollGenerator.roll(1, 20);
+                            dieRoll = this.diceRollGenerator.roll(1, SpellTable.ILLUSIONIST_MU_LEVEL_1.length);
                             value = dieRoll.getTotal() - 1;
 
                             flSpell = SpellTable.ILLUSIONIST_MU_LEVEL_1[value];

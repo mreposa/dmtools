@@ -1,7 +1,11 @@
 package org.mreposa.dmtools.model.adnd.magic;
 
 import org.mreposa.dmtools.generator.adnd.DiceRollGenerator;
+import org.mreposa.dmtools.generator.adnd.SpellGenerator;
+import org.mreposa.dmtools.model.adnd.spells.SpellTable;
 import org.mreposa.dmtools.model.roll.Roll;
+
+import java.util.List;
 
 public class ScrollB extends MagicItemTable {
     public ScrollB(DiceRollGenerator diceRollGenerator) {
@@ -14,47 +18,55 @@ public class ScrollB extends MagicItemTable {
         int roll = dieRoll.getTotal();
 
         String itemName = "scroll of ";
-        String type = "";
-        int typeRoll = 0;
-        int levelRoll = 0;
+        String type;
+        int typeRoll;
+        int levelRoll;
         int spellCount = 0;
-        StringBuilder spellLevels = new StringBuilder();
-        String casterClass = "";
+        StringBuilder spells = new StringBuilder();
+        String casterClass;
+        SpellGenerator spellGenerator = new SpellGenerator(this.diceRollGenerator);
+        List<String> spellList;
 
         dieRoll = this.diceRollGenerator.roll(1, 100);
         int classRoll = dieRoll.getTotal();
-        int subClassRoll = 0;
+        int subClassRoll;
 
         if (classRoll < 71) {
-            casterClass = "magic-user";
+            // Magic-User
+            casterClass = SpellTable.SPELL_CLASSES[0];
 
             dieRoll = this.diceRollGenerator.roll(1, 100);
             subClassRoll = dieRoll.getTotal();
 
             if  (subClassRoll < 11) {
-                casterClass = "illusionist";
+                // Illusionist
+                casterClass = SpellTable.SPELL_CLASSES[3];
             }
         }
         else {
-            casterClass = "cleric";
+            // Cleric
+            casterClass = SpellTable.SPELL_CLASSES[1];
 
             dieRoll = this.diceRollGenerator.roll(1, 100);
             subClassRoll = dieRoll.getTotal();
 
             if  (subClassRoll < 26) {
-                casterClass = "druid";
+                // Druid
+                casterClass = SpellTable.SPELL_CLASSES[2];
             }
         }
 
         if (roll < 11) {
             dieRoll = this.diceRollGenerator.roll(1, 4);
             levelRoll = dieRoll.getTotal();
-            itemName = itemName + "1 " + casterClass + " spell (level " + levelRoll + ")";
+            spellList = spellGenerator.generate(1, levelRoll, casterClass, true);
+            itemName = itemName + "1 " + casterClass + " spell (" + spellList.getFirst() + ")";
         }
         else if (roll < 17) {
             dieRoll = this.diceRollGenerator.roll(1, 6);
             levelRoll = dieRoll.getTotal();
-            itemName = itemName + "1 " + casterClass + " spell (level " + levelRoll + ")";
+            spellList = spellGenerator.generate(1, levelRoll, casterClass, true);
+            itemName = itemName + "1 " + casterClass + " spell (" + spellList.getFirst() + ")";
         }
         else if (roll < 20) {
             if (classRoll < 71) {
@@ -66,29 +78,32 @@ public class ScrollB extends MagicItemTable {
                 levelRoll = dieRoll.getTotal() + 1;
             }
 
-            itemName = itemName + "1 " + casterClass + " spell (level " + levelRoll + ")";
+            spellList = spellGenerator.generate(1, levelRoll, casterClass, true);
+            itemName = itemName + "1 " + casterClass + " spell (" + spellList.getFirst() + ")";
         }
         else if (roll < 25) {
             while (spellCount < 2) {
                 dieRoll = this.diceRollGenerator.roll(1, 4);
                 levelRoll = dieRoll.getTotal();
-                spellLevels.append(levelRoll);
+                spellList = spellGenerator.generate(1, levelRoll, casterClass, true);
+                spells.append(spellList.getFirst());
                 if (spellCount < 1) {
-                    spellLevels.append(", ");
+                    spells.append(", ");
                 }
                 spellCount++;
             }
 
-            itemName = itemName + "2 " + casterClass + " spells (level " + spellLevels + ")";
+            itemName = itemName + "2 " + casterClass + " spells (" + spells + ")";
         }
         else if (roll < 28) {
             if (classRoll < 71) {
                 while (spellCount < 2) {
                     dieRoll = this.diceRollGenerator.roll(1, 8);
                     levelRoll = dieRoll.getTotal();
-                    spellLevels.append(levelRoll);
+                    spellList = spellGenerator.generate(1, levelRoll, casterClass, true);
+                    spells.append(spellList.getFirst());
                     if (spellCount < 1) {
-                        spellLevels.append(", ");
+                        spells.append(", ");
                     }
                     spellCount++;
                 }
@@ -97,37 +112,40 @@ public class ScrollB extends MagicItemTable {
                 while (spellCount < 2) {
                     dieRoll = this.diceRollGenerator.roll(1, 6);
                     levelRoll = dieRoll.getTotal();
-                    spellLevels.append(levelRoll);
+                    spellList = spellGenerator.generate(1, levelRoll, casterClass, true);
+                    spells.append(spellList.getFirst());
                     if (spellCount < 1) {
-                        spellLevels.append(", ");
+                        spells.append(", ");
                     }
                     spellCount++;
                 }
             }
 
-            itemName = itemName + "2 " + casterClass + " spells (level " + spellLevels + ")";
+            itemName = itemName + "2 " + casterClass + " spells (" + spells + ")";
         }
         else if (roll < 33) {
             while (spellCount < 3) {
                 dieRoll = this.diceRollGenerator.roll(1, 4);
                 levelRoll = dieRoll.getTotal();
-                spellLevels.append(levelRoll);
+                spellList = spellGenerator.generate(1, levelRoll, casterClass, true);
+                spells.append(spellList.getFirst());
                 if (spellCount < 2) {
-                    spellLevels.append(", ");
+                    spells.append(", ");
                 }
                 spellCount++;
             }
 
-            itemName = itemName + "3 " + casterClass + " spells (level " + spellLevels + ")";
+            itemName = itemName + "3 " + casterClass + " spells (" + spells + ")";
         }
         else if (roll < 36) {
             if (classRoll < 71) {
                 while (spellCount < 3) {
                     dieRoll = this.diceRollGenerator.roll(1, 8);
                     levelRoll = dieRoll.getTotal() + 1;
-                    spellLevels.append(levelRoll);
+                    spellList = spellGenerator.generate(1, levelRoll, casterClass, true);
+                    spells.append(spellList.getFirst());
                     if (spellCount < 2) {
-                        spellLevels.append(", ");
+                        spells.append(", ");
                     }
                     spellCount++;
                 }
@@ -136,37 +154,40 @@ public class ScrollB extends MagicItemTable {
                 while (spellCount < 3) {
                     dieRoll = this.diceRollGenerator.roll(1, 6);
                     levelRoll = dieRoll.getTotal() + 1;
-                    spellLevels.append(levelRoll);
+                    spellList = spellGenerator.generate(1, levelRoll, casterClass, true);
+                    spells.append(spellList.getFirst());
                     if (spellCount < 2) {
-                        spellLevels.append(", ");
+                        spells.append(", ");
                     }
                     spellCount++;
                 }
             }
 
-            itemName = itemName + "3 " + casterClass + " spells (level " + spellLevels + ")";
+            itemName = itemName + "3 " + casterClass + " spells (" + spells + ")";
         }
         else if (roll < 40) {
             while (spellCount < 4) {
                 dieRoll = this.diceRollGenerator.roll(1, 6);
                 levelRoll = dieRoll.getTotal() + 1;
-                spellLevels.append(levelRoll);
+                spellList = spellGenerator.generate(1, levelRoll, casterClass, true);
+                spells.append(spellList.getFirst());
                 if (spellCount < 3) {
-                    spellLevels.append(", ");
+                    spells.append(", ");
                 }
                 spellCount++;
             }
 
-            itemName = itemName + "4 " + casterClass + " spells (level "  + spellLevels + ")";
+            itemName = itemName + "4 " + casterClass + " spells ("  + spells + ")";
         }
         else if (roll < 43) {
             if (classRoll < 71) {
                 while (spellCount < 4) {
                     dieRoll = this.diceRollGenerator.roll(1, 8);
                     levelRoll = dieRoll.getTotal();
-                    spellLevels.append(levelRoll);
+                    spellList = spellGenerator.generate(1, levelRoll, casterClass, true);
+                    spells.append(spellList.getFirst());
                     if (spellCount < 3) {
-                        spellLevels.append(", ");
+                        spells.append(", ");
                     }
                     spellCount++;
                 }
@@ -175,37 +196,40 @@ public class ScrollB extends MagicItemTable {
                 while (spellCount < 4) {
                     dieRoll = this.diceRollGenerator.roll(1, 6);
                     levelRoll = dieRoll.getTotal();
-                    spellLevels.append(levelRoll);
+                    spellList = spellGenerator.generate(1, levelRoll, casterClass, true);
+                    spells.append(spellList.getFirst());
                     if (spellCount < 3) {
-                        spellLevels.append(", ");
+                        spells.append(", ");
                     }
                     spellCount++;
                 }
             }
 
-            itemName = itemName + "4 " + casterClass + " spells (level " + spellLevels + ")";
+            itemName = itemName + "4 " + casterClass + " spells (" + spells + ")";
         }
         else if (roll < 47) {
             while (spellCount < 5) {
                 dieRoll = this.diceRollGenerator.roll(1, 6);
                 levelRoll = dieRoll.getTotal();
-                spellLevels.append(levelRoll);
+                spellList = spellGenerator.generate(1, levelRoll, casterClass, true);
+                spells.append(spellList.getFirst());
                 if (spellCount < 4) {
-                    spellLevels.append(", ");
+                    spells.append(", ");
                 }
                 spellCount++;
             }
 
-            itemName = itemName + "5 " + casterClass + " spells (level "  + spellLevels + ")";
+            itemName = itemName + "5 " + casterClass + " spells ("  + spells + ")";
         }
         else if (roll < 50) {
             if (classRoll < 71) {
                 while (spellCount < 5) {
                     dieRoll = this.diceRollGenerator.roll(1, 8);
                     levelRoll = dieRoll.getTotal();
-                    spellLevels.append(levelRoll);
+                    spellList = spellGenerator.generate(1, levelRoll, casterClass, true);
+                    spells.append(spellList.getFirst());
                     if (spellCount < 4) {
-                        spellLevels.append(", ");
+                        spells.append(", ");
                     }
                     spellCount++;
                 }
@@ -214,37 +238,40 @@ public class ScrollB extends MagicItemTable {
                 while (spellCount < 5) {
                     dieRoll = this.diceRollGenerator.roll(1, 6);
                     levelRoll = dieRoll.getTotal();
-                    spellLevels.append(levelRoll);
+                    spellList = spellGenerator.generate(1, levelRoll, casterClass, true);
+                    spells.append(spellList.getFirst());
                     if (spellCount < 4) {
-                        spellLevels.append(", ");
+                        spells.append(", ");
                     }
                     spellCount++;
                 }
             }
 
-            itemName = itemName + "5 " + casterClass + " spells (level " + spellLevels + ")";
+            itemName = itemName + "5 " + casterClass + " spells (" + spells + ")";
         }
         else if (roll < 53) {
             while (spellCount < 6) {
                 dieRoll = this.diceRollGenerator.roll(1, 6);
                 levelRoll = dieRoll.getTotal();
-                spellLevels.append(levelRoll);
+                spellList = spellGenerator.generate(1, levelRoll, casterClass, true);
+                spells.append(spellList.getFirst());
                 if (spellCount < 5) {
-                    spellLevels.append(", ");
+                    spells.append(", ");
                 }
                 spellCount++;
             }
 
-            itemName = itemName + "6 " + casterClass + " spells (level " + spellLevels + ")";
+            itemName = itemName + "6 " + casterClass + " spells (" + spells + ")";
         }
         else if (roll < 55) {
             if (classRoll < 71) {
                 while (spellCount < 6) {
                     dieRoll = this.diceRollGenerator.roll(1, 6);
                     levelRoll = dieRoll.getTotal() + 2;
-                    spellLevels.append(levelRoll);
+                    spellList = spellGenerator.generate(1, levelRoll, casterClass, true);
+                    spells.append(spellList.getFirst());
                     if (spellCount < 5) {
-                        spellLevels.append(", ");
+                        spells.append(", ");
                     }
                     spellCount++;
                 }
@@ -253,24 +280,26 @@ public class ScrollB extends MagicItemTable {
                 while (spellCount < 6) {
                     dieRoll = this.diceRollGenerator.roll(1, 4);
                     levelRoll = dieRoll.getTotal() + 2;
-                    spellLevels.append(levelRoll);
+                    spellList = spellGenerator.generate(1, levelRoll, casterClass, true);
+                    spells.append(spellList.getFirst());
                     if (spellCount < 5) {
-                        spellLevels.append(", ");
+                        spells.append(", ");
                     }
                     spellCount++;
                 }
             }
 
-            itemName = itemName + "6 " + casterClass + " spells (level " + spellLevels + ")";
+            itemName = itemName + "6 " + casterClass + " spells (" + spells + ")";
         }
         else if (roll < 58) {
             if (classRoll < 71) {
                 while (spellCount < 7) {
                     dieRoll = this.diceRollGenerator.roll(1, 8);
                     levelRoll = dieRoll.getTotal();
-                    spellLevels.append(levelRoll);
+                    spellList = spellGenerator.generate(1, levelRoll, casterClass, true);
+                    spells.append(spellList.getFirst());
                     if (spellCount < 6) {
-                        spellLevels.append(", ");
+                        spells.append(", ");
                     }
                     spellCount++;
                 }
@@ -279,24 +308,26 @@ public class ScrollB extends MagicItemTable {
                 while (spellCount < 7) {
                     dieRoll = this.diceRollGenerator.roll(1, 6);
                     levelRoll = dieRoll.getTotal();
-                    spellLevels.append(levelRoll);
+                    spellList = spellGenerator.generate(1, levelRoll, casterClass, true);
+                    spells.append(spellList.getFirst());
                     if (spellCount < 6) {
-                        spellLevels.append(", ");
+                        spells.append(", ");
                     }
                     spellCount++;
                 }
             }
 
-            itemName = itemName + "7 " + casterClass + " spells (level " + spellLevels + ")";
+            itemName = itemName + "7 " + casterClass + " spells (" + spells + ")";
         }
         else if (roll < 60) {
             if (classRoll < 71) {
                 while (spellCount < 7) {
                     dieRoll = this.diceRollGenerator.roll(1, 8);
                     levelRoll = dieRoll.getTotal() + 1;
-                    spellLevels.append(levelRoll);
+                    spellList = spellGenerator.generate(1, levelRoll, casterClass, true);
+                    spells.append(spellList.getFirst());
                     if (spellCount < 6) {
-                        spellLevels.append(", ");
+                        spells.append(", ");
                     }
                     spellCount++;
                 }
@@ -305,24 +336,26 @@ public class ScrollB extends MagicItemTable {
                 while (spellCount < 7) {
                     dieRoll = this.diceRollGenerator.roll(1, 6);
                     levelRoll = dieRoll.getTotal() + 1;
-                    spellLevels.append(levelRoll);
+                    spellList = spellGenerator.generate(1, levelRoll, casterClass, true);
+                    spells.append(spellList.getFirst());
                     if (spellCount < 6) {
-                        spellLevels.append(", ");
+                        spells.append(", ");
                     }
                     spellCount++;
                 }
             }
 
-            itemName = itemName + "7 " + casterClass + " spells (level " + spellLevels + ")";
+            itemName = itemName + "7 " + casterClass + " spells (" + spells + ")";
         }
         else if (roll == 60) {
             if (classRoll < 71) {
                 while (spellCount < 7) {
                     dieRoll = this.diceRollGenerator.roll(1, 6);
                     levelRoll = dieRoll.getTotal() + 3;
-                    spellLevels.append(levelRoll);
+                    spellList = spellGenerator.generate(1, levelRoll, casterClass, true);
+                    spells.append(spellList.getFirst());
                     if (spellCount < 6) {
-                        spellLevels.append(", ");
+                        spells.append(", ");
                     }
                     spellCount++;
                 }
@@ -331,15 +364,16 @@ public class ScrollB extends MagicItemTable {
                 while (spellCount < 7) {
                     dieRoll = this.diceRollGenerator.roll(1, 4);
                     levelRoll = dieRoll.getTotal() + 3;
-                    spellLevels.append(levelRoll);
+                    spellList = spellGenerator.generate(1, levelRoll, casterClass, true);
+                    spells.append(spellList.getFirst());
                     if (spellCount < 6) {
-                        spellLevels.append(", ");
+                        spells.append(", ");
                     }
                     spellCount++;
                 }
             }
 
-            itemName = itemName + "7 " + casterClass + " spells (level " + spellLevels + ")";
+            itemName = itemName + "7 " + casterClass + " spells (" + spells + ")";
         }
         else if (roll < 63) {
             itemName = itemName + "protection - demons";
@@ -413,6 +447,36 @@ public class ScrollB extends MagicItemTable {
             itemName = itemName + "curse";
         }
 
+        // Special Case: on any Illusionist scroll,  re-roll the 7th level spell "First Level Magic-User Spells"
+        if (casterClass.equals(SpellTable.SPELL_CLASSES[3]) && itemName.contains(SpellTable.ILLUSIONIST_LEVEL_7[4])) {
+            itemName = fixIllusionistScroll(itemName);
+        }
+
         return itemName;
+    }
+
+    private String fixIllusionistScroll(String scroll) {
+        SpellGenerator spellGenerator = new SpellGenerator();
+        List<String> spells;
+        StringBuilder sb;
+        int start;
+        int end;
+        String newSpell = "";
+
+        sb = new StringBuilder(scroll);
+        while (sb.indexOf(SpellTable.ILLUSIONIST_LEVEL_7[7]) != -1) {
+            do {
+                spells = spellGenerator.generate(1, 7, SpellTable.SPELL_CLASSES[3], true);
+                newSpell = spells.getFirst();
+            }
+            while (newSpell.contains(SpellTable.ILLUSIONIST_LEVEL_7[7]));
+
+            start = sb.indexOf(SpellTable.ILLUSIONIST_LEVEL_7[7]);
+            end = sb.indexOf("]") + 1;
+
+            sb.replace(start, end, newSpell);
+        }
+
+        return sb.toString();
     }
 }
