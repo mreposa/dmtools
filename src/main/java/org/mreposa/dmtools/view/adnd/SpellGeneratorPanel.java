@@ -8,7 +8,7 @@ import javax.swing.*;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
 import java.awt.*;
-import java.util.List;
+import java.util.Set;
 
 public class SpellGeneratorPanel extends JPanel {
     private static final long serialVersionUID = 1L;
@@ -20,7 +20,6 @@ public class SpellGeneratorPanel extends JPanel {
     private final JComboBox<String> spellCount;
     private final JComboBox<String> casterClass;
     private final JComboBox<String> spellLevel;
-    private final JCheckBox allowDuplicates;
     private final JEditorPane display;
 
     public SpellGeneratorPanel(DiceRollGenerator rollGenerator) {
@@ -57,15 +56,12 @@ public class SpellGeneratorPanel extends JPanel {
         this.spellLevel.setSelectedIndex(0);
         selectionPanel.add(this.spellLevel);
 
-        this.allowDuplicates = new JCheckBox("Allow Duplicates", true);
-        selectionPanel.add(this.allowDuplicates);
-
         JButton generateButton = new JButton("Generate");
         Dimension bd = new Dimension(90, 20);
         generateButton.setSize(bd);
         generateButton.setPreferredSize(bd);
         generateButton.setMaximumSize(bd);
-        generateButton.addActionListener(_ -> displayRoll());
+        generateButton.addActionListener(_ -> displaySpells());
         selectionPanel.add(generateButton);
 
         JButton clearButton = new JButton("Clear");
@@ -83,11 +79,10 @@ public class SpellGeneratorPanel extends JPanel {
         add(this.display, BorderLayout.CENTER);
     }
 
-    private void displayRoll() {
+    private void displaySpells() {
         int count = this.spellCount.getSelectedIndex() + 1;
         int level = this.spellLevel.getSelectedIndex() + 1;
         String casterClass = SpellTable.SPELL_CLASSES[this.casterClass.getSelectedIndex()];
-        boolean allowDuplicates = this.allowDuplicates.isSelected();
 
         if (!casterClass.equals(SpellTable.SPELL_CLASSES[0])) {
             if (level > 7) {
@@ -95,7 +90,7 @@ public class SpellGeneratorPanel extends JPanel {
             }
         }
 
-        java.util.List<String> spells = this.spellGenerator.generate(count, level, casterClass, allowDuplicates);
+        java.util.Set<String> spells = this.spellGenerator.generate(count, level, casterClass);
 
         String output = getOutput(level, spells);
 
@@ -107,7 +102,7 @@ public class SpellGeneratorPanel extends JPanel {
         }
     }
 
-    private String getOutput(int level, List<String> spells) {
+    private String getOutput(int level, Set<String> spells) {
         if  (spells == null || spells.isEmpty()) {
             throw new IllegalArgumentException("Invalid spell list");
         }

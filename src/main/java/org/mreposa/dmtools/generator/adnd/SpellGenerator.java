@@ -4,7 +4,9 @@ import org.mreposa.dmtools.model.adnd.spells.SpellTable;
 import org.mreposa.dmtools.model.roll.Roll;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class SpellGenerator {
     private final DiceRollGenerator diceRollGenerator;
@@ -17,8 +19,8 @@ public class SpellGenerator {
         this.diceRollGenerator = diceRollGenerator;
     }
 
-    public List<String> generate(int count, int level, String casterClass, boolean allowDuplicates) {
-        List<String> spellList = new ArrayList<>();
+    public Set<String> generate(int count, int level, String casterClass) {
+        Set<String> spellList = new HashSet<>();
         String spell;
         int s = 0;
         boolean found = false;
@@ -26,10 +28,8 @@ public class SpellGenerator {
         while (s < count) {
             spell = getSpell(level, casterClass);
 
-            if (!allowDuplicates) {
-                while (spellList.contains(spell)) {
-                    spell = getSpell(level, casterClass);
-                }
+            while (spellList.contains(spell)) {
+                spell = getSpell(level, casterClass);
             }
 
             // Special Case: An Illusionist may only choose "First Level Magic-User Spells" once
@@ -58,7 +58,26 @@ public class SpellGenerator {
         return spellList;
     }
 
-    private String getSpell(int level, String casterClass) {
+    // This is used when generating a spell book, which comes with starting first level spells
+    public Set<String> generateAdditionalFirstLevelSpells(int count, String casterClass, Set<String> spellList) {
+        int level = 1;
+        int s = spellList.size();
+
+        String spell;
+        while (s < count) {
+            spell = getSpell(level, casterClass);
+
+            while (!spellList.add(spell)) {
+                spell = getSpell(level, casterClass);
+            }
+
+            s++;
+        }
+
+        return spellList;
+    }
+
+    public String getSpell(int level, String casterClass) {
         String spell;
         Roll dieRoll;
         int value;
@@ -256,7 +275,7 @@ public class SpellGenerator {
 
                 if (spell.equals(SpellTable.ILLUSIONIST_LEVEL_7[7])) {
                     // Generate four allowed 1st level Magic-User spells
-                    ArrayList<String> firstLevelIllusionistSpellList = new ArrayList<>();
+                    HashSet<String> firstLevelMagicUserSpellList = new HashSet<>();
                     int count = 0;
                     String flSpell;
 
@@ -266,22 +285,22 @@ public class SpellGenerator {
 
                         flSpell = SpellTable.ILLUSIONIST_MU_LEVEL_1[value];
 
-                        while (firstLevelIllusionistSpellList.contains(flSpell)) {
+                        while (firstLevelMagicUserSpellList.contains(flSpell)) {
                             dieRoll = this.diceRollGenerator.roll(1, SpellTable.ILLUSIONIST_MU_LEVEL_1.length);
                             value = dieRoll.getTotal() - 1;
 
                             flSpell = SpellTable.ILLUSIONIST_MU_LEVEL_1[value];
                         }
 
-                        firstLevelIllusionistSpellList.add(flSpell);
+                        firstLevelMagicUserSpellList.add(flSpell);
                         count++;
                     }
 
                     spell = spell + " [";
                     count = 0;
-                    for (String s : firstLevelIllusionistSpellList) {
+                    for (String s : firstLevelMagicUserSpellList) {
                         spell = spell + s;
-                        if (count < firstLevelIllusionistSpellList.size() - 1) {
+                        if (count < firstLevelMagicUserSpellList.size() - 1) {
                             spell = spell + (", ");
                         }
                         count++;
@@ -292,5 +311,64 @@ public class SpellGenerator {
         }
 
         return spell;
+    }
+
+    public Set<String> getAllSpells(int level, String casterClass) {
+        List<String> spellList = new ArrayList<>();
+
+        if (casterClass.equals(SpellTable.SPELL_CLASSES[0])) {
+            if (level == 1) {
+                spellList = List.of(SpellTable.MAGIC_USER_LEVEL_1);
+            }
+            else if (level == 2) {
+                spellList = List.of(SpellTable.MAGIC_USER_LEVEL_2);
+            }
+            else if (level == 3) {
+                spellList = List.of(SpellTable.MAGIC_USER_LEVEL_3);
+            }
+            else if (level == 4) {
+                spellList = List.of(SpellTable.MAGIC_USER_LEVEL_4);
+            }
+            else if (level == 5) {
+                spellList = List.of(SpellTable.MAGIC_USER_LEVEL_5);
+            }
+            else if (level == 6) {
+                spellList = List.of(SpellTable.MAGIC_USER_LEVEL_6);
+            }
+            else if (level == 7) {
+                spellList = List.of(SpellTable.MAGIC_USER_LEVEL_7);
+            }
+            else if (level == 8) {
+                spellList = List.of(SpellTable.MAGIC_USER_LEVEL_8);
+            }
+            else {
+                spellList = List.of(SpellTable.MAGIC_USER_LEVEL_9);
+            }
+        }
+        else {
+            if (level == 1) {
+                spellList = List.of(SpellTable.ILLUSIONIST_LEVEL_1);
+            }
+            else if (level == 2) {
+                spellList = List.of(SpellTable.ILLUSIONIST_LEVEL_2);
+            }
+            else if (level == 3) {
+                spellList = List.of(SpellTable.ILLUSIONIST_LEVEL_3);
+            }
+            else if (level == 4) {
+                spellList = List.of(SpellTable.ILLUSIONIST_LEVEL_4);
+            }
+            else if (level == 5) {
+                spellList = List.of(SpellTable.ILLUSIONIST_LEVEL_5);
+            }
+            else if (level == 6) {
+                spellList = List.of(SpellTable.ILLUSIONIST_LEVEL_6);
+            }
+            else  {
+                spellList = List.of(SpellTable.ILLUSIONIST_LEVEL_7);
+            }
+        }
+
+        return new HashSet<>(spellList);
     }
 }

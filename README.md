@@ -68,3 +68,6 @@ limitations under the License.
 
 ### Spell Generator Tab
 * Generate random Cleric, Druid, Illusionist, and Magic-User spells
+
+### Spell Book Generator Tab
+* Generate complete Magic-User and Illusionist spell books
